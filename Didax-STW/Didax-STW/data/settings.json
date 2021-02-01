@@ -1,0 +1,10 @@
+{
+  "windowSettings": {
+    "videoModeWidth": 1920,
+    "videoModeHeight": 1080,
+    "windowStyle": 8
+  },
+  "assetsFile": "assets.dat",
+  "textureFile": "textures.dat",
+  "audioFile": "audio.dat"
+}

@@ -13,21 +13,81 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Pliki źródłowe\Engine">
-      <UniqueIdentifier>{f03d5fa3-a57d-4964-ac43-772480cea1a2}</UniqueIdentifier>
+    <Filter Include="Pliki nagłówkowe\Entity">
+      <UniqueIdentifier>{27d10506-8741-44d1-afc4-aa242af5efd3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki nagłówkowe\Engine">
-      <UniqueIdentifier>{9bf857d1-739e-4695-9a41-d2ffa9905800}</UniqueIdentifier>
+    <Filter Include="Pliki źródłowe\Entity">
+      <UniqueIdentifier>{3c18c0b8-62e5-4687-b210-19480398b3a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Window">
+      <UniqueIdentifier>{c44beb83-dd53-4304-8445-879d83cdfea5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Assets">
+      <UniqueIdentifier>{3890b983-5235-4dfe-8437-0d9403e968a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Input">
+      <UniqueIdentifier>{075f9777-22a1-46b3-82d1-fa24ac2cddaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Assets">
+      <UniqueIdentifier>{7d2ec133-67de-4996-8454-8d37354e76d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Input">
+      <UniqueIdentifier>{fdf7ab58-6211-4b73-a25d-cfe71d1e5579}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Window">
+      <UniqueIdentifier>{91d21c7e-ecbd-49ba-a1d3-c7ebff77998b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Utility">
+      <UniqueIdentifier>{908e198d-2f90-47b3-8980-5f61bd76c3cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Utility">
+      <UniqueIdentifier>{25682c5f-354b-4eb0-9ab6-71577cdaa235}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Pliki źródłowe\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Pliki źródłowe\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Pliki źródłowe\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>Pliki źródłowe\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset.cpp">
+      <Filter>Pliki źródłowe\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="DataLoader.cpp">
+      <Filter>Pliki źródłowe\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Entity.h">
+      <Filter>Pliki nagłówkowe\Entity</Filter>
+    </ClInclude>
     <ClInclude Include="Engine.h">
-      <Filter>Pliki nagłówkowe\Engine</Filter>
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Pliki nagłówkowe\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Pliki nagłówkowe\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManager.h">
+      <Filter>Pliki nagłówkowe\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset.h">
+      <Filter>Pliki nagłówkowe\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="DataLoader.h">
+      <Filter>Pliki nagłówkowe\Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
