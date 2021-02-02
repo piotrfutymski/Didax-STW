@@ -54,7 +54,7 @@ void Didax::AssetManager::loadAssetsFromFile(const std::string& filename)
 				a = createAsset<DataAsset>(it.key());
 			else
 				continue;
-			a->loadAssetRaw(it.value());
+			a->loadAsset(it.value());
 		}
 	}
 	catch (const std::exception& ) {

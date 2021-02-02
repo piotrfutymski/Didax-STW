@@ -11,9 +11,7 @@ namespace Didax
 	public:
 		AudioAsset(const std::string& name);
 
-		virtual void loadAssetRaw(const nlohmann::json& asset) override;
-
-		virtual void loadAssetBin(const nlohmann::json& asset) override;
+		virtual void loadAsset(const nlohmann::json& asset) override;
 
 	public:
 

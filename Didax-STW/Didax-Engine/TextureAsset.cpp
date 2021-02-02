@@ -4,7 +4,7 @@ Didax::TextureAsset::TextureAsset(const std::string& name):Asset(name)
 {
 }
 
-void Didax::TextureAsset::loadAssetRaw(const nlohmann::json& asset)
+void Didax::TextureAsset::loadAsset(const nlohmann::json& asset)
 {
 	sf::Image i;
 	i.loadFromFile(asset["path"]);
@@ -12,6 +12,3 @@ void Didax::TextureAsset::loadAssetRaw(const nlohmann::json& asset)
 	texture.loadFromImage(i);
 }
 
-void Didax::TextureAsset::loadAssetBin(const nlohmann::json& asset)
-{
-}
