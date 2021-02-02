@@ -1,19 +1,11 @@
 #pragma once
 
-#include <vector>
-#include <string>
-#include <fstream>
-#include <iostream>
 #include <type_traits>
-#include <thread>
-
-#include <SFML/Graphics.hpp>
 
 #include "Entity.h"
 #include "Window.h"
+#include "Input.h"
 #include "AssetManager.h"
-
-
 
 namespace Didax
 {
@@ -33,9 +25,9 @@ namespace Didax
 
         Engine(const std::string& dataFilePath);
 
-        int init(const std::string& dataFilePath);
+        void init(const std::string& dataFilePath);
 
-        void run();
+        bool run();
 
         //
 
@@ -65,7 +57,7 @@ namespace Didax
 
     private:
 
-        std::string dataFilePath;
+        std::string m_dataFilePath;
         nlohmann::json m_settings;
 
         EntityHolder_t m_entities;
@@ -78,6 +70,12 @@ namespace Didax
         AssetManager m_assets;
 
     private:
+
+        bool loadSettings();
+
+        bool createWindow();
+
+        bool loadAssets();
 
         void input();
 

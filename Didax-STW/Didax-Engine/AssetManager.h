@@ -3,7 +3,10 @@
 #include <memory>
 #include <map>
 
-#include "Asset.h"
+#include "AudioAsset.h"
+#include "DataAsset.h"
+#include "FontAsset.h"
+#include "TextureAsset.h"
 
 namespace Didax
 {
@@ -16,9 +19,9 @@ namespace Didax
 
 		AssetManager();
 
-		void loadAssets(const std::string& assetfilename);
+		bool loadAssets(const std::string& assetfilename, bool assetPacked);
 
-		void saveAssets(const std::string& assetfilename)const;
+		bool saveAssets(const std::string& assetfilename, bool assetPacked)const;
 
 
 		template<typename T>
@@ -39,11 +42,14 @@ namespace Didax
 
 	private:
 
-		static AssetHolder_t m_assets;
+		AssetHolder_t m_assets;
 
 	private:
 
-		
+		bool loadAssetsFromBinary(const std::string& assetfilename);
+
+		bool loadAssetsFromRaw(const std::string& assetfilename);
+		void loadAssetsFromFile(const std::string& filename);
 
 	};
 

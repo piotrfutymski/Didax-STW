@@ -150,20 +150,32 @@
   <ItemGroup>
     <ClCompile Include="Asset.cpp" />
     <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="AudioAsset.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="DataAsset.cpp" />
     <ClCompile Include="DataLoader.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="FontAsset.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="TextureAsset.cpp" />
     <ClCompile Include="Window.cpp" />
+    <ClCompile Include="WindowConfig.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asset.h" />
     <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="AudioAsset.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="DataAsset.h" />
     <ClInclude Include="DataLoader.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="FontAsset.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="TextureAsset.h" />
     <ClInclude Include="Window.h" />
+    <ClInclude Include="WindowConfig.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

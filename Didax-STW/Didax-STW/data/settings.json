@@ -4,7 +4,7 @@
     "videoModeHeight": 1080,
     "windowStyle": 8
   },
-  "assetsFile": "assets.dat",
-  "textureFile": "textures.dat",
-  "audioFile": "audio.dat"
+  "assetPacked": false,
+  "assetsFileBin": "data/assets.dat",
+  "assetsFileRaw": "data/assets.json"
 }

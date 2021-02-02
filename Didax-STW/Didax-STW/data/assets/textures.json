@@ -1,0 +1,10 @@
+{
+  "warrior": {
+    "type": "texture",
+    "path":  "data/graphix/testwarrior.bmp"
+  },
+  "archer": {
+    "type": "texture",
+    "path": "data/graphix/lucznik.bmp"
+  }
+}

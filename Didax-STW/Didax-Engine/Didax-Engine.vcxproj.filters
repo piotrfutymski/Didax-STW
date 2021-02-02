@@ -66,6 +66,24 @@
     <ClCompile Include="DataLoader.cpp">
       <Filter>Pliki źródłowe\Utility</Filter>
     </ClCompile>
+    <ClCompile Include="WindowConfig.cpp">
+      <Filter>Pliki źródłowe\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Pliki źródłowe\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureAsset.cpp">
+      <Filter>Pliki źródłowe\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="FontAsset.cpp">
+      <Filter>Pliki źródłowe\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioAsset.cpp">
+      <Filter>Pliki źródłowe\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="DataAsset.cpp">
+      <Filter>Pliki źródłowe\Assets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -88,6 +106,24 @@
     </ClInclude>
     <ClInclude Include="DataLoader.h">
       <Filter>Pliki nagłówkowe\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowConfig.h">
+      <Filter>Pliki nagłówkowe\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Pliki nagłówkowe\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureAsset.h">
+      <Filter>Pliki nagłówkowe\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="FontAsset.h">
+      <Filter>Pliki nagłówkowe\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioAsset.h">
+      <Filter>Pliki nagłówkowe\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="DataAsset.h">
+      <Filter>Pliki nagłówkowe\Assets</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

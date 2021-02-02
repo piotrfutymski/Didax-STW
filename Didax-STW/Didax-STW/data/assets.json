@@ -1,8 +1,5 @@
 {
-  "warrior": {
-    "type": "texture"
-  },
-  "archer": {
-    "type": "texture"
-  }
+  "textures": {
+    "path": "data/assets/textures.json"
+  } 
 }
