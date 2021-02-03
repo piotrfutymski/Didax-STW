@@ -101,12 +101,13 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>../;../../../nlohmann_json_release-master/single_include;../../../SFML-2.5.1/include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../../../SFML-2.5.1/lib;../x64/Debug;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Didax-Engine.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfml-system-d.lib;sfml-main-d.lib;sfml-network-d.lib;ogg.lib;openal32.lib</AdditionalDependencies>
+      <AdditionalDependencies>Didax-Engine.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-system-d.lib;opengl32.lib;sfml-main-d.lib;freetype.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

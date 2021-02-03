@@ -9,13 +9,9 @@ Didax::Engine::Engine(const std::string& dataFilePath)
 	init(dataFilePath);
 }
 
-void Didax::Engine::init(const std::string& dataFilePath)
+bool Didax::Engine::init(const std::string& dataFilePath)
 {
 	m_dataFilePath = dataFilePath;
-}
-
-bool Didax::Engine::run()
-{
 	if (!loadSettings())
 		return false;
 	if (!createWindow())
@@ -23,6 +19,10 @@ bool Didax::Engine::run()
 	if (!loadAssets())
 		return false;
 	srand((unsigned int)(time(NULL)));
+}
+
+void Didax::Engine::run()
+{
 	m_clock.restart();
 	while (m_window.getWindow().isOpen())
 	{
@@ -30,27 +30,28 @@ bool Didax::Engine::run()
 		render();
 		input();
 	}
-	return true;
 }
 
 Didax::Entity_ptr Didax::Engine::addEntity()
 {
-	return Entity_ptr();
+	auto name = getNextName();
+	return addEntity(name);
 }
 
 Didax::Entity_ptr Didax::Engine::addEntity(const std::string& name)
 {
-	return Entity_ptr();
+	return addEntity<VoidScript>(name);
 }
 
 Didax::Entity_ptr Didax::Engine::getEntity(const std::string& name)
 {
-	return Entity_ptr();
+	return  m_entities[name].get();
 }
 
 Didax::Entity_ptr Didax::Engine::removeEntity(const std::string& name)
 {
-	return Entity_ptr();
+	m_entities[name]->setToKill();
+	return m_entities[name].get();
 }
 
 float Didax::Engine::getDeltaTime() const
@@ -60,28 +61,46 @@ float Didax::Engine::getDeltaTime() const
 
 void Didax::Engine::setCameraPosition(float x, float y)
 {
+	setCameraPosition({ x,y });
 }
 
 void Didax::Engine::setCameraPosition(const sf::Vector2f& p)
 {
+	auto vi = m_window.getWindow().getView();
+	vi.setCenter(p);
+	m_window.getWindow().setView(vi);
+}
+
+void Didax::Engine::moveCamera(const sf::Vector2f& d)
+{
+	setCameraPosition(getCameraPosition() + d);
 }
 
 sf::Vector2f Didax::Engine::getCameraPosition() const
 {
-	return sf::Vector2f();
+	return m_window.getWindow().getView().getCenter();
 }
 
 void Didax::Engine::setCameraSize(float w, float h)
 {
+	setCameraSize({ w,h });
 }
 
 void Didax::Engine::setCameraSize(const sf::Vector2f& p)
 {
+	auto vi = m_window.getWindow().getView();
+	vi.setSize(p);
+	m_window.getWindow().setView(vi);
 }
 
 sf::Vector2f Didax::Engine::getCameraSize() const
 {
-	return sf::Vector2f();
+	return m_window.getWindow().getView().getSize();
+}
+
+Didax::AssetManager* Didax::Engine::getAssets()
+{
+	return &m_assets;
 }
 
 bool Didax::Engine::loadSettings()
@@ -143,7 +162,8 @@ void Didax::Engine::input()
 			m_window.getWindow().close();
 #endif // DEBUG
 
-	// TO DO
+		for (auto& name : m_priortyQueue)
+			m_entities[name]->input(event);
 	}
 }
 
@@ -152,15 +172,53 @@ void Didax::Engine::update()
 	auto time = m_clock.getElapsedTime();
 	m_clock.restart();
 	m_deltaT = time.asSeconds();
+#ifdef _DEBUG
+	debClock -= m_deltaT;
+	if (debClock < 0)
+	{
+		std::cout << "Frames: " + std::to_string((int)(1.0f / m_deltaT)) << std::endl;
+		debClock = 1.0f;
+	}		
+#endif // DEBUG
 
-	// TO DO
+	for (auto& name : m_entitiesAdded)
+		m_priortyQueue.push_back(name);
+	if (m_entitiesAdded.size() != 0)
+		sortEntities();
+	for (auto& name : m_priortyQueue)
+		m_entities[name]->update(m_deltaT);
+	m_entitiesAdded = {};
+	for (auto it = m_entities.begin(); it != m_entities.end(); )
+	{
+		if ((*it).second->getToKill())
+		{
+			(*it).second->kill();
+			m_priortyQueue.erase(std::remove(m_priortyQueue.begin(), m_priortyQueue.end(), (*it).first), m_priortyQueue.end());
+			it = m_entities.erase(it);			
+		}
+		else
+			++it;
+	}
 }
 
 void Didax::Engine::render()
 {
 	m_window.getWindow().clear(sf::Color{ 255,255,255,255 });
 
-	// TO Do
+	for (auto it = m_priortyQueue.rbegin(); it != m_priortyQueue.rend(); it++)
+		m_window.getWindow().draw(*m_entities[*it]);
 
 	m_window.render();
+}
+
+std::string Didax::Engine::getNextName()
+{
+	return "Entity_" + std::to_string(ID++);
+}
+
+void Didax::Engine::sortEntities()
+{
+	std::sort(m_priortyQueue.begin(), m_priortyQueue.begin(), [&](auto& left, auto& right) {
+		return m_entities[left]->getPriority() < m_entities[right]->getPriority();
+	});
 }

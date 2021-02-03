@@ -10,14 +10,14 @@
 namespace Didax
 {
 
-    typedef std::weak_ptr<Entity> Entity_ptr;
+    typedef Entity* Entity_ptr;
 
     class Engine
     {
     public:
 
-        using EntityHolder_t = std::unordered_map<std::string, std::shared_ptr<Entity>>;
-        using EntityPriorityMap_t = std::map<int, std::string>;
+        using EntityHolder_t = std::unordered_map<std::string, std::unique_ptr<Entity>>;
+        using EntityPriorityMap_t = std::vector<std::string>;
 
         //
 
@@ -25,9 +25,9 @@ namespace Didax
 
         Engine(const std::string& dataFilePath);
 
-        void init(const std::string& dataFilePath);
+        bool init(const std::string& dataFilePath);
 
-        bool run();
+        void run();
 
         //
 
@@ -47,13 +47,40 @@ namespace Didax
 
         void setCameraPosition(const sf::Vector2f & p);
 
+        void moveCamera(const sf::Vector2f& d);
+
         sf::Vector2f getCameraPosition()const;
 
         void setCameraSize(float w, float h);
 
         void setCameraSize(const sf::Vector2f& p);
 
-        sf::Vector2f getCameraSize()const;    
+        sf::Vector2f getCameraSize()const;
+
+        //
+        
+
+        template<typename T, typename... Args>
+        Entity_ptr addEntity(const std::string& name, Args&&... args)
+        {
+            m_entities[name] = std::move(std::make_unique<Entity>(this, name));
+            m_entitiesAdded.push_back(name);
+            m_entities[name]->init<T>(std::forward<Args>(args)...);
+            if constexpr (detail::has_setMe<T, void(Entity_ptr)>::value)
+                m_entities[name]->getScript<T>()->getGameObject()->setMe(m_entities[name].get());
+            m_entities[name]->start();
+            return m_entities[name].get();
+        }
+
+        template<typename T>
+        Entity_ptr addEntity()
+        {
+            return addEntity<T>(getNextName());
+        }
+
+        AssetManager* getAssets();
+
+        void sortEntities();
 
     private:
 
@@ -63,11 +90,16 @@ namespace Didax
         EntityHolder_t m_entities;
         EntityPriorityMap_t m_priortyQueue;
 
-        float m_deltaT{ 0.0 };
+        float m_deltaT{ 0.0f };
+        float debClock{ 1.0f };
 
         sf::Clock m_clock;
         Window m_window;
         AssetManager m_assets;
+
+        size_t ID{ 0 };
+
+        std::vector<std::string> m_entitiesAdded{};
 
     private:
 
@@ -82,6 +114,8 @@ namespace Didax
         void update();
 
         void render();
+
+        std::string getNextName();
 
     };
 

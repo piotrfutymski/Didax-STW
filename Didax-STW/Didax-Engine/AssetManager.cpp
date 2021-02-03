@@ -51,7 +51,7 @@ void Didax::AssetManager::loadAssetsFromFile(const std::string& filename)
 			else if (it.value()["type"] == "font")
 				a = createAsset<FontAsset>(it.key());
 			else if (it.value()["type"] == "texture")
-				a = createAsset<DataAsset>(it.key());
+				a = createAsset<TextureAsset>(it.key());
 			else
 				continue;
 			a->loadAsset(it.value());
