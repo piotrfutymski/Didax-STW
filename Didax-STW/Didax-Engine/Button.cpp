@@ -47,6 +47,10 @@ void Didax::Button::_update(float deltaT)
 			c == Widget::CallbackType::onPress || c == Widget::CallbackType::onRelease)
 		{
 			this->updateColor();
+			if (c == Widget::CallbackType::onHoverIn)
+				Input::setCursor(Input::CursorState::Click);
+			if (c == Widget::CallbackType::onHoverOut)
+				Input::setCursor(Input::CursorState::Standard);
 			break;
 		}
 	}

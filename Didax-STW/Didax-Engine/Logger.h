@@ -4,7 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <exception>
-
+#include<fstream>
 #include <nlohmann/json.hpp>
 
 namespace Didax
@@ -17,6 +17,10 @@ namespace Didax
 		};
 
 		static void log(const std::string& msg, Level = Level::Error);
+
+		static void close();
+
+		static std::ofstream file;
 	};
 
 }

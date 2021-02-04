@@ -29,6 +29,8 @@ namespace Didax
 
         void run();
 
+        void setOwnCursor(const std::string& def, const std::string& hand, const std::string& load);
+
         //
 
         Entity_ptr addEntity();
@@ -100,6 +102,8 @@ namespace Didax
         size_t ID{ 0 };
 
         std::vector<std::string> m_entitiesAdded{};
+
+        bool m_ownCursor{ false };
 
     private:
 

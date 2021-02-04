@@ -95,8 +95,6 @@ void Didax::Widget::setColor(const sf::Color& c)
 {
 	m_color = c;
 	this->updateColor();
-	for (auto x : m_children)
-		x->setColor(c);
 }
 
 void Didax::Widget::setColorInTime(const sf::Color& c, float T)
@@ -274,7 +272,6 @@ void Didax::Widget::setParent(Widget* parent)
 	m_parent = parent;
 	setPositionDontStop(m_position);
 	setSize(m_size);
-	setColor(parent->getColor());
 }
 
 void Didax::Widget::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -367,7 +364,11 @@ void Didax::Widget::poolEvents(const sf::Event& e)
 		m_callbacks.push_back(CallbackType::onPressRight);
 
 	if (e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Button::Left && m_isPressed)
+	{
+		m_isPressed = false;
 		m_callbacks.push_back(CallbackType::onRelease);
+	}
+		
 }
 
 void Didax::Widget::updateEvents()

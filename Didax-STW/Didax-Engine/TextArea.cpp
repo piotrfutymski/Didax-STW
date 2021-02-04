@@ -3,6 +3,7 @@
 Didax::TextArea::TextArea(AssetManager* a):Widget(a)
 {
 	m_background.setFillColor(m_backgroundColor);
+	m_font = nullptr;
 }
 
 sf::Color Didax::TextArea::getBackgroundColor() const
@@ -18,7 +19,7 @@ void Didax::TextArea::setBackgroundColor(sf::Color c)
 
 void Didax::TextArea::setBackgroundColor(sf::Uint8 r, sf::Uint8 g, sf::Uint8 b, sf::Uint8 a)
 {
-	m_background.setFillColor(sf::Color(r, g, b, a));
+	setBackgroundColor(sf::Color(r, g, b, a));
 }
 
 void Didax::TextArea::setFontColor(sf::Color c)
@@ -107,7 +108,7 @@ void Didax::TextArea::resizeToText()
 sf::Vector2f Didax::TextArea::getTextSize() const
 {
 	sf::Vector2f res{ 0,0 };
-	for (size_t i = 0; i < m_textLines.size(); i++)
+	for (int i = 0; i < m_textLines.size(); i++)
 	{
 		if (m_textLines[i].getGlobalBounds().width > res.x)
 			res.x = m_textLines[i].getGlobalBounds().width;
@@ -154,7 +155,7 @@ void Didax::TextArea::updateColor()
 void Didax::TextArea::recalculateLinesPositions()
 {
 	float x, y = 0;
-
+	auto abs = m_absolute_position;
 	for (size_t i = 0; i < m_textLines.size(); i++)
 	{
 		if (m_alaign == Alaign::Left)
@@ -172,9 +173,10 @@ void Didax::TextArea::recalculateLinesPositions()
 			x = (m_size.x - l - m_margin.x);
 		}
 		y = m_margin.y + i * (m_characterSize + m_lineSpacing);
-		auto abs = m_absolute_position;
+		
 		m_textLines[i].setPosition((int)(abs.x + x), (int)(abs.y + y));
 	}
+	m_background.setPosition(abs);
 }
 
 void Didax::TextArea::recalculateLines()
@@ -197,7 +199,7 @@ void Didax::TextArea::recalculateLines()
 		{
 			sf::String old = newLine.getString();
 			newLine.setString(old + buf + L' ');
-			if (getTextLineLength(newLine) > m_size.y - m_margin.y*2)
+			if (getTextLineLength(newLine) > m_size.x - m_margin.x*2)
 			{
 				newLine.setString(old);
 				m_textLines.push_back(newLine);

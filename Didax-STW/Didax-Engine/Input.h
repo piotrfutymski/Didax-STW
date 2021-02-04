@@ -1,5 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
+#include "SFML/Window.hpp"
 
 namespace Didax
 {
@@ -8,14 +9,34 @@ namespace Didax
 	{
 	public:
 
+		enum class CursorState {
+			Standard, Click, Loading
+		};
+
 		static void setWindow(sf::Window* w);
 
 		static sf::Vector2i getMousePosition();
 
 		static sf::Vector2i getRezolution();
+
+		static void setCursorTexture(CursorState s, sf::Texture* t);
+
+		static void setCursor(CursorState s);
+
+		static void moveCursor();
+
+		static sf::Sprite* getCursor();
+
 	private:
 
 		static sf::Window* m_window;
+
+		static sf::Sprite m_cursor;
+
+		static sf::Texture*  m_textures[3];
+
+
+
 	};
 
 }

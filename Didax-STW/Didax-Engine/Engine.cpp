@@ -19,6 +19,7 @@ bool Didax::Engine::init(const std::string& dataFilePath)
 	if (!loadAssets())
 		return false;
 	srand((unsigned int)(time(NULL)));
+	return true;
 }
 
 void Didax::Engine::run()
@@ -30,6 +31,35 @@ void Didax::Engine::run()
 		render();
 		input();
 	}
+	Logger::close();
+}
+
+void Didax::Engine::setOwnCursor(const std::string& def, const std::string& hand, const std::string& load)
+{
+	auto t1 = m_assets.getAsset<TextureAsset>(def);
+	if (t1 == nullptr)
+	{
+		Logger::log("Texture with name '" + def + "' is not loaded");
+		return;
+	}
+	auto t2 = m_assets.getAsset<TextureAsset>(hand);
+	if (t2 == nullptr)
+	{
+		Logger::log("Texture with name '" + hand + "' is not loaded");
+		return;
+	}
+	auto t3 = m_assets.getAsset<TextureAsset>(load);
+	if (t3 == nullptr)
+	{
+		Logger::log("Texture with name '" + load + "' is not loaded");
+		return;
+	}
+	m_window.getWindow().setMouseCursorVisible(false);
+	Input::setCursorTexture(Input::CursorState::Standard, &t1->texture);
+	Input::setCursorTexture(Input::CursorState::Click, &t2->texture);
+	Input::setCursorTexture(Input::CursorState::Loading, &t3->texture);
+	Input::setCursor(Input::CursorState::Standard);
+	m_ownCursor = true;
 }
 
 Didax::Entity_ptr Didax::Engine::addEntity()
@@ -207,6 +237,11 @@ void Didax::Engine::render()
 
 	for (auto it = m_priortyQueue.rbegin(); it != m_priortyQueue.rend(); it++)
 		m_window.getWindow().draw(*m_entities[*it]);
+	if (m_ownCursor)
+	{
+		Input::moveCursor();
+		m_window.getWindow().draw(*Input::getCursor());
+	}
 
 	m_window.render();
 }

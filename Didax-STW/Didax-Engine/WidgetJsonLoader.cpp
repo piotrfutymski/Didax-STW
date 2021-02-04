@@ -105,7 +105,7 @@ void Didax::WidgetJsonLoader::initTextArea(Widget* w, nlohmann::json& widgData, 
 		int r = widgData["backgroundColor"][0];
 		int g = widgData["backgroundColor"][1];
 		int b = widgData["backgroundColor"][2];
-		txt->setBackgroundColor(r, b, g);
+		txt->setBackgroundColor(r, g, b, 255);
 	}
 	if (widgData.contains("text"))
 	{

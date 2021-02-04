@@ -58,6 +58,7 @@ void Didax::AssetManager::loadAssetsFromFile(const std::string& filename)
 	}
 	catch (const std::exception& e) {
 		Logger::log("Unable to load assets from file " + filename, Logger::Level::Warn);
+		Logger::log({e.what()}, Logger::Level::Warn);
 	}
 }
 

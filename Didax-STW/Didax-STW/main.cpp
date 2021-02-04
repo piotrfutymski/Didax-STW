@@ -12,7 +12,7 @@ public:
 	void onStart(Didax::Engine* e)
 	{
 		auto w = me->createWidget("testWIDG");
-		w->setPositionInTime(100, 100, 5);
+		//w->setPositionInTime(100, 100, 5);
 	}
 
 	void onUpdate(Didax::Engine* e)
@@ -29,6 +29,7 @@ public:
 int main()
 {
 	Didax::Engine e("data/settings.json");
+	e.setOwnCursor("arrowCUR", "handCUR", "loadingCUR");
 	e.addEntity<Test>();
 	e.run();
 }
