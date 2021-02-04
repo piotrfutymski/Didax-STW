@@ -9,9 +9,7 @@ void Didax::Canvas::setTexture(const std::string& name)
 	auto t = m_assets->getAsset<TextureAsset>(name);
 	if (t == nullptr)
 	{
-#ifdef _DEBUG
-		std::cout << "Asset with name: " + name + " is not loaded" << std::endl;
-#endif // _DEBUG
+		Logger::log("Texture with name '" + name + "' is not loaded");
 		return;
 	}
 	m_backgroundSprite.setTexture(t->texture);

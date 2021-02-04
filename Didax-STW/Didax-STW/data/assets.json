@@ -1,5 +1,11 @@
 {
   "textures": {
     "path": "data/assets/textures.json"
-  } 
+  },
+  "fonts": {
+    "path": "data/assets/fonts.json"
+  },
+  "widgets": {
+    "path": "data/assets/widgets.json"
+  }
 }

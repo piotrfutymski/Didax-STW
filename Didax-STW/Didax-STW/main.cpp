@@ -11,11 +11,8 @@ public:
 	
 	void onStart(Didax::Engine* e)
 	{
-		auto canv = me->createWidget<Didax::Canvas>();
-		canv->setTexture("warrior");
-		canv->setPosition(150, 150);
-		canv->setSize(100,100);
-		canv->setColorInTime(sf::Color::Red, 5);
+		auto w = me->createWidget("testWIDG");
+		w->setPositionInTime(100, 100, 5);
 	}
 
 	void onUpdate(Didax::Engine* e)
@@ -32,10 +29,6 @@ public:
 int main()
 {
 	Didax::Engine e("data/settings.json");
-	for (int i = 0; i < 500; i++)
-	{
-		auto v =e.addEntity<Test>();
-		v->getWidget<Didax::Canvas>()->setPositionInTime(sf::Vector2f{ 1500,800 }, (i + 200.0f) / 200.0f);
-	}
+	e.addEntity<Test>();
 	e.run();
 }

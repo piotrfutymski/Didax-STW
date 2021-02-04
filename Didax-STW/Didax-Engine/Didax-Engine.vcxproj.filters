@@ -43,6 +43,12 @@
     <Filter Include="Pliki źródłowe\Utility">
       <UniqueIdentifier>{25682c5f-354b-4eb0-9ab6-71577cdaa235}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\Widget">
+      <UniqueIdentifier>{5e8222d4-b38d-4888-bf39-5ac78e75cd7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Widget">
+      <UniqueIdentifier>{1a9d5e04-2320-499c-8d19-34b14597325e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -82,10 +88,22 @@
       <Filter>Pliki źródłowe\Assets</Filter>
     </ClCompile>
     <ClCompile Include="Widget.cpp">
-      <Filter>Pliki źródłowe\Entity</Filter>
+      <Filter>Pliki źródłowe\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Pliki źródłowe\Widget</Filter>
     </ClCompile>
     <ClCompile Include="Canvas.cpp">
-      <Filter>Pliki źródłowe\Entity</Filter>
+      <Filter>Pliki źródłowe\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="TextArea.cpp">
+      <Filter>Pliki źródłowe\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="WidgetJsonLoader.cpp">
+      <Filter>Pliki źródłowe\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Pliki źródłowe\Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,11 +152,26 @@
     <ClInclude Include="HasMember.h">
       <Filter>Pliki nagłówkowe\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Canvas.h">
-      <Filter>Pliki nagłówkowe\Entity</Filter>
-    </ClInclude>
     <ClInclude Include="VoidScript.h">
       <Filter>Pliki nagłówkowe\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Pliki nagłówkowe\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Pliki nagłówkowe\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="TextArea.h">
+      <Filter>Pliki nagłówkowe\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets.h">
+      <Filter>Pliki nagłówkowe\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="WidgetJsonLoader.h">
+      <Filter>Pliki nagłówkowe\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Pliki nagłówkowe\Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

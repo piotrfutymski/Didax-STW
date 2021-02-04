@@ -197,10 +197,10 @@ std::vector<Didax::Widget*>& Didax::Widget::getChildren()
 
 void Didax::Widget::setLimitArea(const sf::Vector2f& A, const sf::Vector2f& B)
 {
-	m_borderArea[0].x = A.x + m_absolute_position.x;
-	m_borderArea[0].y = A.y + m_absolute_position.y;
-	m_borderArea[1].x = B.x + m_absolute_position.x;
-	m_borderArea[1].y = B.y + m_absolute_position.y;
+	m_borderArea[0].x = A.x;
+	m_borderArea[0].y = A.y;
+	m_borderArea[1].x = B.x;
+	m_borderArea[1].y = B.y;
 	for (auto x : m_children)
 		x->setLimitArea(A - x->getPosition(), B - x->getPosition());
 	m_isSetArea = true;
@@ -372,12 +372,13 @@ void Didax::Widget::poolEvents(const sf::Event& e)
 
 void Didax::Widget::updateEvents()
 {
-	if (isMouseIn() && m_isHovered == false)
+	auto isMouseInn = isMouseIn();
+	if (isMouseInn && m_isHovered == false)
 	{
 		m_isHovered = true;
 		m_callbacks.push_back(CallbackType::onHoverIn);
 	}
-	else if (!isMouseIn() && m_isHovered == true)
+	else if (!isMouseInn && m_isHovered == true)
 	{
 		m_isHovered = false;
 		m_callbacks.push_back(CallbackType::onHoverOut);
@@ -396,8 +397,6 @@ void Didax::Widget::drawOnly(sf::RenderTarget& target, sf::RenderStates states) 
 
 void Didax::Widget::recalculateAbsolutePosition(const sf::Vector2f& delta)
 {
-	if (m_isSetArea)
-		setLimitArea(m_borderArea[0] + delta, m_borderArea[1] + delta);
 
 	if (m_parent == nullptr)
 		m_absolute_position = m_position;
@@ -413,8 +412,7 @@ void Didax::Widget::setPositionDontStop(const sf::Vector2f& pos)
 	updatePosition();
 	for (auto x : m_children)
 	{
-		x->recalculateAbsolutePosition(delta);
-		x->updatePosition();	
+		x->setPositionDontStop(x->getPosition());
 	}
 	
 }

@@ -1,7 +1,7 @@
 {
   "warrior": {
     "type": "texture",
-    "path":  "data/graphix/testwarrior.bmp"
+    "path": "data/graphix/testwarrior.bmp"
   },
   "archer": {
     "type": "texture",

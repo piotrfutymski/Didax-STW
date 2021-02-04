@@ -7,6 +7,8 @@
 
 #include <nlohmann/json.hpp>
 
+#include "Logger.h"
+
 namespace Didax 
 {
 	class DataLoader

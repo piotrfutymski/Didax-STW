@@ -14,7 +14,7 @@ namespace Didax
 		virtual void loadAsset(const nlohmann::json& asset) override;
 
 	public:
-
+		nlohmann::json data;
 	};
 
 }

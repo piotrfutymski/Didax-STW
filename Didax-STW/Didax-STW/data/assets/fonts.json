@@ -1,0 +1,11 @@
+{
+  "arial": {
+    "type": "font",
+    "path": "data/fonts/arial.ttf"
+  },
+  "DKNorthumbria": {
+    "type": "font",
+    "path": "data/fonts/DKNorthumbria.otf"
+  }
+
+}

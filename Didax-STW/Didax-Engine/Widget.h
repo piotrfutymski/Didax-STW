@@ -15,6 +15,7 @@
 
 namespace Didax
 {
+
 	class Widget : public sf::Drawable
 	{
 	public:
@@ -109,7 +110,7 @@ namespace Didax
 
 		bool m_isHovered{ false };
 		bool m_isPressed{ false };
-		bool m_isInterable{ false };
+		bool m_isInterable{ true };
 
 		std::vector<Widget*> m_children;
 		Widget* m_parent{ nullptr };

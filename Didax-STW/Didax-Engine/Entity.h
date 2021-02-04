@@ -2,7 +2,7 @@
 
 #include "Script.h"
 #include "VoidScript.h"
-#include "Canvas.h"
+#include "WidgetJsonLoader.h"
 
 namespace Didax
 {
@@ -36,12 +36,21 @@ class Engine;
 			return static_cast<T*> (m_widget.get());
 		}
 
+		Widget * createWidget(const std::string& name, int priority = 0);
+
 		template<typename T>
 		typename std::enable_if<std::is_base_of<Widget, T>::value, T>::type* getWidget()
 		{
 			if (m_widget == nullptr)
 				return nullptr;
 			return static_cast<T*>(m_widget.get());
+		}
+
+		Widget* getWidget()
+		{
+			if (m_widget == nullptr)
+				return nullptr;
+			return m_widget.get();
 		}
 
 		void removeWidget();

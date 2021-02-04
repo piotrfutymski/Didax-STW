@@ -218,7 +218,7 @@ std::string Didax::Engine::getNextName()
 
 void Didax::Engine::sortEntities()
 {
-	std::sort(m_priortyQueue.begin(), m_priortyQueue.begin(), [&](auto& left, auto& right) {
-		return m_entities[left]->getPriority() < m_entities[right]->getPriority();
+	std::sort(m_priortyQueue.begin(), m_priortyQueue.end(), [&](auto& left, auto& right) {
+		return m_entities[left]->getPriority() > m_entities[right]->getPriority();
 	});
 }

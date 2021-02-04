@@ -1,5 +1,6 @@
 #include "AssetManager.h"
 
+
 Didax::AssetManager::AssetManager()
 {
 }
@@ -29,9 +30,7 @@ bool Didax::AssetManager::loadAssetsFromRaw(const std::string& assetfilename)
 			loadAssetsFromFile(filename["path"]);
 	}
 	catch (const std::exception&) {
-#ifdef _DEBUG
-		std::cout << "Unable to load file " << assetfilename << std::endl;
-#endif // _DEBUG
+		Logger::log("Unable to open file " + assetfilename, Logger::Level::Warn);
 		return false;
 	}
 	return true;
@@ -57,10 +56,8 @@ void Didax::AssetManager::loadAssetsFromFile(const std::string& filename)
 			a->loadAsset(it.value());
 		}
 	}
-	catch (const std::exception& ) {
-#ifdef _DEBUG
-		std::cout << "Unable to load assets from file: " << filename << std::endl;
-#endif // _DEBUG
+	catch (const std::exception& e) {
+		Logger::log("Unable to load assets from file " + filename, Logger::Level::Warn);
 	}
 }
 

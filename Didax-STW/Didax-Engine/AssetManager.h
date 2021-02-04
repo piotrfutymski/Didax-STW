@@ -3,6 +3,7 @@
 #include <memory>
 #include <map>
 
+#include "Logger.h"
 #include "AudioAsset.h"
 #include "DataAsset.h"
 #include "FontAsset.h"

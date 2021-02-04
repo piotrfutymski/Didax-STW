@@ -1,0 +1,55 @@
+{
+  "testWIDG": {
+    "type": "data",
+    "widgetType": "canvas",
+    "background": "warrior",
+    "rectangle": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    "children": [ "mainMenuWIDG", "gameLooseInfoWIDG"]
+  },
+  "mainMenuWIDG": {
+    "type": "data",
+    "widgetType": "canvas",
+    "background": "warrior",
+    "rectangle": {
+      "x": 700,
+      "y": 200,
+      "width": 350,
+      "height": 700
+    },
+    "children": [ "newCampaignButtonWIDG" ]
+  },
+  "gameLooseInfoWIDG": {
+    "type": "data",
+    "widgetType": "textArea",
+    "opacity": 70,
+    "text":  "Battle Brothe...\n\nIt's recommended..." ,
+    "fontsize": 12,
+    "fontcolor": [ 120, 142, 202 ],
+    "backgroundColor": [ 0, 0, 0 ],
+    "font": "arial",
+    "margin":  [10,10],
+    "rectangle": {
+      "x": 1500,
+      "y": 700,
+      "width": 200,
+      "height": 100
+    }
+  },
+  "newCampaignButtonWIDG": {
+    "type": "data",
+    "widgetType": "button",
+    "background": "warrior",
+    "rectangle": {
+      "x": 50,
+      "y": 300,
+      "width": 120,
+      "height": 30
+    }
+  }
+
+}
