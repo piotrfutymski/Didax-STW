@@ -84,6 +84,8 @@ namespace Didax
 
         void sortEntities();
 
+        void close();
+
     private:
 
         std::string m_dataFilePath;
@@ -104,6 +106,7 @@ namespace Didax
         std::vector<std::string> m_entitiesAdded{};
 
         bool m_ownCursor{ false };
+        bool m_close{ false };
 
     private:
 

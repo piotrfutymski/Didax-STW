@@ -2,54 +2,206 @@
   "testWIDG": {
     "type": "data",
     "widgetType": "canvas",
-    "background": "warrior",
+    "background": "MainMenuBackground",
+	"interable": false,
     "rectangle": {
       "x": 0,
       "y": 0,
       "width": 1920,
       "height": 1080
     },
-    "children": [ "mainMenuWIDG", "gameLooseInfoWIDG"]
+    "children": [ "mainMenuWIDG", "GameInfoWIDG"]
   },
   "mainMenuWIDG": {
     "type": "data",
     "widgetType": "canvas",
-    "background": "warrior",
+	"opacity": 50,
+    "background": "MainMenuPaper",
+    "interable": false,
     "rectangle": {
-      "x": 700,
+      "x": 640,
       "y": 200,
-      "width": 350,
-      "height": 700
+      "width": 640,
+      "height": 600
     },
-    "children": [ "newCampaignButtonWIDG" ]
+    "children": [ "NewCampaignButtonWIDG", "LoadCampaignButtonWIDG", "OptionsButtonWIDG", "AuthorsButtonWIDG", "QuitButtonWIDG"]
   },
-  "gameLooseInfoWIDG": {
+  "GameInfoWIDG": {
     "type": "data",
     "widgetType": "textArea",
-    "opacity": 70,
-    "text":  "Battle Brothe...\n\nIt's recommended..." ,
-    "fontsize": 12,
-    "fontcolor": [ 120, 142, 202 ],
-    "backgroundColor": [ 0, 0, 0 ],
+    "opacity": 100,
+    "text":  "\"Save The World\" is simply the best game in the world, but I'am not sure if that's the best name for the game." ,
+    "fontsize": 14,
+    "fontcolor": [ 30, 10, 10 ],
+    "backgroundColor": [200, 220, 230 ],
     "font": "arial",
-    "margin":  [10,10],
+    "margin":  [5,5],
+	"textalign": "center",
     "rectangle": {
-      "x": 1500,
-      "y": 700,
+      "x": 50,
+      "y": 50,
       "width": 200,
       "height": 100
     }
   },
-  "newCampaignButtonWIDG": {
+  "NewCampaignButtonWIDG": {
     "type": "data",
     "widgetType": "button",
-    "background": "warrior",
+	"opacity": 80,
+    "background": "ButtonLeather",
     "rectangle": {
-      "x": 50,
-      "y": 300,
-      "width": 120,
-      "height": 30
-    }
+      "x": 160,
+      "y": 100,
+      "width": 320,
+      "height": 50
+    },
+	"children": ["NewGameWIDG"]
+  },
+  "NewGameWIDG": {
+    "type": "data",
+    "widgetType": "textArea",
+    "opacity": 100,
+    "text":  "NEW GAME" ,
+	"interable": false,
+    "fontsize": 30,
+    "fontcolor": [ 0, 0, 0 ],
+    "font": "arial",
+    "margin":  [5,7],
+	"textalign": "center",
+    "rectangle": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 50
+	}
+  },
+  "LoadCampaignButtonWIDG": {
+    "type": "data",
+    "widgetType": "button",
+	"opacity": 80,
+    "background": "ButtonLeather",
+    "rectangle": {
+      "x": 160,
+      "y": 160,
+      "width": 320,
+      "height": 50
+    },
+	"children": ["LoadGameWIDG"]
+  },
+  "LoadGameWIDG": {
+    "type": "data",
+    "widgetType": "textArea",
+    "opacity": 100,
+    "text":  "LOAD GAME" ,
+	"interable": false,
+    "fontsize": 30,
+    "fontcolor": [ 0, 0, 0 ],
+    "font": "arial",
+    "margin":  [5,7],
+	"textalign": "center",
+    "rectangle": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 50
+	}
+  },
+  "OptionsButtonWIDG": {
+    "type": "data",
+    "widgetType": "button",
+	"opacity": 80,
+    "background": "ButtonLeather",
+    "rectangle": {
+      "x": 160,
+      "y": 220,
+      "width": 320,
+      "height": 50
+    },
+	"children": ["OptionsWIDG"]
+  },
+  "OptionsWIDG": {
+    "type": "data",
+    "widgetType": "textArea",
+    "opacity": 100,
+    "text":  "OPTIONS" ,
+	"interable": false,
+    "fontsize": 30,
+    "fontcolor": [ 0, 0, 0 ],
+    "font": "arial",
+    "margin":  [5,7],
+	"textalign": "center",
+    "rectangle": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 50
+	}
+  },
+  "AuthorsButtonWIDG": {
+    "type": "data",
+    "widgetType": "button",
+	"opacity": 80,
+    "background": "ButtonLeather",
+    "rectangle": {
+      "x": 160,
+      "y": 280,
+      "width": 320,
+      "height": 50
+    },
+	"children": ["AuthorsWIDG"]
+  },
+  "AuthorsWIDG": {
+    "type": "data",
+    "widgetType": "textArea",
+    "opacity": 100,
+    "text":  "AUTHORS" ,
+	"interable": false,
+    "fontsize": 30,
+    "fontcolor": [ 0, 0, 0 ],
+    "font": "arial",
+    "margin":  [5,7],
+	"textalign": "center",
+    "rectangle": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 50
+	}
+  },
+  "QuitButtonWIDG": {
+    "type": "data",
+    "widgetType": "button",
+	"opacity": 80,
+    "background": "ButtonLeather",
+    "rectangle": {
+      "x": 160,
+      "y": 460,
+      "width": 320,
+      "height": 50
+    },
+    "onPress": {
+      "hide": "mainMenuWIDG"
+    },   
+     "children": [ "QuitWIDG" ]
+    },
+  "QuitWIDG": {
+    "type": "data",
+    "widgetType": "textArea",
+    "opacity": 100,
+    "text":  "QUIT" ,
+	"interable": false,
+    "fontsize": 30,
+    "fontcolor": [ 0, 0, 0 ],
+    "font": "arial",
+    "margin":  [5,7],
+	"textalign": "center",
+    "rectangle": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 50
+	  }
   }
+  
 
 }

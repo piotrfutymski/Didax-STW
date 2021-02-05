@@ -7,6 +7,26 @@
     "type": "texture",
     "path": "data/graphix/lucznik.bmp"
   },
+  "test1": {
+    "type": "texture",
+    "path": "data/graphix/test1.bmp"
+  },
+  "MainMenuBackground": {
+	"type": "texture",
+	"path": "data/graphix/MainMenuBackground.bmp"
+  },
+  "MainMenuWood": {
+	"type": "texture",
+	"path": "data/graphix/MainMenuWood.bmp"
+  },
+  "MainMenuPaper": {
+	"type": "texture",
+	"path": "data/graphix/MainMenuPaper.bmp"
+  },
+  "ButtonLeather": {
+	"type": "texture",
+	"path": "data/graphix/ButtonLeather.bmp"
+  },
   "arrowCUR": {
     "type": "texture",
     "path": "data/graphix/arrowCUR.bmp"

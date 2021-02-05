@@ -1,6 +1,6 @@
 #include "TextArea.h"
 
-Didax::TextArea::TextArea(AssetManager* a):Widget(a)
+Didax::TextArea::TextArea(AssetManager* a, Entity* e) :Widget(a, e)
 {
 	m_background.setFillColor(m_backgroundColor);
 	m_font = nullptr;

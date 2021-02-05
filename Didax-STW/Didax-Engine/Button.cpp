@@ -1,6 +1,6 @@
 #include "Button.h"
 
-Didax::Button::Button(AssetManager* a):Widget(a)
+Didax::Button::Button(AssetManager* a, Entity*e):Widget(a,e)
 {
 }
 

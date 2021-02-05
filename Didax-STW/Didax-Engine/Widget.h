@@ -15,6 +15,7 @@
 
 namespace Didax
 {
+	class Entity;
 
 	class Widget : public sf::Drawable
 	{
@@ -29,12 +30,13 @@ namespace Didax
 
 	public:
 
-		Widget(AssetManager* a);
+		Widget(AssetManager* a, Entity * e);
 
 		void update(float dt);
 		void input(const sf::Event& evt);
 
 		bool isInArea(const sf::Vector2f& a, const sf::Vector2f& b);
+		Entity* getEntity();
 
 		void setPosition(const sf::Vector2f& pos);
 		void setPosition(float x, float y);
@@ -66,6 +68,14 @@ namespace Didax
 
 		bool isInterable()const;
 		void setInterable(bool i);
+
+		bool isActive()const;
+		void setActive(bool a);
+
+		bool isVisible()const;
+		void setVisible(bool v);
+
+		bool isMovingInTime()const;
 
 		const std::vector <Widget*>& getChildren()const;
 		std::vector <Widget*>& getChildren();
@@ -111,6 +121,8 @@ namespace Didax
 		bool m_isHovered{ false };
 		bool m_isPressed{ false };
 		bool m_isInterable{ true };
+		bool m_isVisible{ true };
+		bool m_isActive{ true };
 
 		std::vector<Widget*> m_children;
 		Widget* m_parent{ nullptr };
@@ -128,6 +140,8 @@ namespace Didax
 
 		sf::Vector2f m_borderArea[2]{ {0,0},{0,0} };
 		bool m_isSetArea{ false };
+
+		Entity* m_entity_ptr;
 
 	private:
 

@@ -1,7 +1,7 @@
 #include "WidgetJsonLoader.h"
 #include "Engine.h"
 
-std::unique_ptr<Didax::Widget> Didax::WidgetJsonLoader::create(const std::string& name, AssetManager* a, Engine* eng, int priority)
+std::unique_ptr<Didax::Widget> Didax::WidgetJsonLoader::create(const std::string& name, AssetManager* a, Engine* eng, int priority, Entity* e)
 {
 	auto w = a->getAsset<DataAsset>(name);
 	if (w == nullptr)
@@ -15,7 +15,7 @@ std::unique_ptr<Didax::Widget> Didax::WidgetJsonLoader::create(const std::string
 		Logger::log("Widget with name '" + name + "' don't have [widgetType] property defined - it's obligatory");
 		return nullptr;
 	}
-	auto res = createFromType(widgData["widgetType"], a);
+	auto res = createFromType(widgData["widgetType"], a, e);
 	initWidget(res.get(), widgData, a);
 	initExtendedProperties(res.get(), widgData, a);
 	if (widgData.contains("children"))
@@ -26,18 +26,18 @@ std::unique_ptr<Didax::Widget> Didax::WidgetJsonLoader::create(const std::string
 	return std::move(res);
 }
 
-std::unique_ptr<Didax::Widget> Didax::WidgetJsonLoader::createFromType(const std::string& type, AssetManager* a)
+std::unique_ptr<Didax::Widget> Didax::WidgetJsonLoader::createFromType(const std::string& type, AssetManager* a, Entity* e)
 {
 	if (type == "canvas")
-		return std::move(std::make_unique<Didax::Canvas>(a));
+		return std::move(std::make_unique<Didax::Canvas>(a,e));
 	else if(type == "textArea")
-		return std::move(std::make_unique<Didax::TextArea>(a));
+		return std::move(std::make_unique<Didax::TextArea>(a,e));
 	else if(type == "button")
-		return std::move(std::make_unique<Didax::Button>(a));
+		return std::move(std::make_unique<Didax::Button>(a,e));
 	else
 	{
 		Logger::log("Can't create widget with type: " + type + ", creating canvas instead", Logger::Level::Warn);
-		return std::move(std::make_unique<Didax::Canvas>(a));
+		return std::move(std::make_unique<Didax::Canvas>(a,e));
 	}
 }
 
@@ -50,6 +50,9 @@ void Didax::WidgetJsonLoader::initWidget(Widget* w, nlohmann::json& widgData, As
 	}
 	if (widgData.contains("opacity"))
 		w->setColor(sf::Color(255, 255, 255, (widgData["opacity"] * 255) / 100));
+	if (widgData.contains("interable"))
+		if (!widgData["interable"])
+			w->setInterable(false);
 }
 
 void Didax::WidgetJsonLoader::initExtendedProperties(Widget* w, nlohmann::json& widgData, AssetManager* a)
@@ -132,12 +135,24 @@ void Didax::WidgetJsonLoader::initTextArea(Widget* w, nlohmann::json& widgData, 
 		txt->setMargin({ widgData["margin"][0], widgData["margin"][1] });
 	else
 		txt->setMargin({ 5,5 });
+	if (widgData.contains("textalign"))
+		if (widgData["textalign"] == "center")
+			txt->setAlaign(TextArea::Alaign::Center);
+		else if(widgData["textalign"] == "left")
+			txt->setAlaign(TextArea::Alaign::Left);
+		else if (widgData["textalign"] == "right")
+			txt->setAlaign(TextArea::Alaign::Right);
 }
 
 Didax::Widget* Didax::WidgetJsonLoader::addChild(Widget* parent, std::string name, AssetManager* a, Engine* eng, int priority)
 {
 	auto ent = eng->addEntity(name);
 	auto child = ent->createWidget(name, priority);
+	if (child == nullptr)
+	{
+		Logger::log("Can not create widget with name: " + name);
+		return nullptr;
+	}
 	parent->addChild(child);
 	return child;
 }

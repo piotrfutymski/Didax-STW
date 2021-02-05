@@ -32,7 +32,7 @@ class Engine;
 		template<typename T>
 		typename std::enable_if<std::is_base_of<Widget, T>::value, T>::type* createWidget()
 		{
-			m_widget = std::make_unique<T>(m_assets);
+			m_widget = std::make_unique<T>(m_assets, this);
 			return static_cast<T*> (m_widget.get());
 		}
 
@@ -67,14 +67,8 @@ class Engine;
 		bool getToKill()const;
 		void setToKill();
 
-		bool isVisible()const;
-		void setVisible(bool v);
-
 		int getPriority()const;
 		void setPrority(int p);
-
-		bool isActive()const;
-		void setActive(bool a);
 
 		std::string getName()const;
 
@@ -87,9 +81,7 @@ class Engine;
 		std::unique_ptr<Script_t> m_script{ nullptr };
 		std::unique_ptr<Widget> m_widget{ nullptr };
 
-		bool m_isVisible{ true };
 		int m_priority{ 0 };
-		bool m_isActive{ true };
 		bool m_toKill{ false };
 		
 

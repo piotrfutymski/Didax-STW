@@ -3,6 +3,7 @@
 
 namespace Didax
 {
+	class Entity;
 
 	class Canvas : public Widget
 	{
@@ -12,7 +13,7 @@ namespace Didax
 			None, Rect, Image
 		};
 
-		Canvas(AssetManager * a);
+		Canvas(AssetManager * a, Entity*);
 
 		void setTexture(const std::string & name);
 

@@ -1,6 +1,6 @@
 #include "Canvas.h"
 
-Didax::Canvas::Canvas(AssetManager* a):Widget(a)
+Didax::Canvas::Canvas(AssetManager* a, Entity* e) :Widget(a, e)
 {
 }
 

@@ -1,11 +1,13 @@
 #include "Widget.h"
 
-Didax::Widget::Widget(AssetManager* a):m_assets(a)
+Didax::Widget::Widget(AssetManager* a, Entity* e):m_assets(a), m_entity_ptr(e)
 {
 }
 
 void Didax::Widget::update(float dt)
 {
+	if (!m_isActive)
+		return;
 	actualizeInTime(dt);
 	if (m_isInterable)
 	{
@@ -18,7 +20,7 @@ void Didax::Widget::update(float dt)
 
 void Didax::Widget::input(const sf::Event& evt)
 {
-	if (m_isInterable)
+	if (m_isInterable && m_isActive)
 	{
 		poolEvents(evt);
 		this->_input(evt);
@@ -30,6 +32,11 @@ bool Didax::Widget::isInArea(const sf::Vector2f& a, const sf::Vector2f& b)
 	if (m_position.x > a.x && m_position.x + m_size.x< b.x && m_position.y > a.y && m_position.y + m_size.y < b.y)
 		return true;
 	return false;
+}
+
+Didax::Entity* Didax::Widget::getEntity()
+{
+	return m_entity_ptr;
 }
 
 void Didax::Widget::setPosition(const sf::Vector2f& pos)
@@ -183,6 +190,35 @@ void Didax::Widget::setInterable(bool i)
 	m_callbacks.clear();
 }
 
+bool Didax::Widget::isActive() const
+{
+	return m_isActive;
+}
+
+void Didax::Widget::setActive(bool a)
+{
+	m_isActive = a;
+	for (auto x : m_children)
+		x->setActive(a);
+}
+
+bool Didax::Widget::isVisible() const
+{
+	return m_isVisible;
+}
+
+void Didax::Widget::setVisible(bool v)
+{
+	m_isVisible = v;
+	for (auto x : m_children)
+		x->setVisible(v);
+}
+
+bool Didax::Widget::isMovingInTime() const
+{
+	return m_movingInTime;
+}
+
 const std::vector<Didax::Widget*>& Didax::Widget::getChildren() const
 {
 	return m_children;
@@ -276,6 +312,9 @@ void Didax::Widget::setParent(Widget* parent)
 
 void Didax::Widget::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	if (!m_isVisible)
+		return;
+
 	if (m_isSetArea)
 	{
 		auto h_w = Input::getRezolution().y;

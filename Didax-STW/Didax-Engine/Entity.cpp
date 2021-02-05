@@ -8,40 +8,32 @@ Didax::Entity::Entity(Engine* parent, const std::string& name) :m_parent(parent)
 
 void Didax::Entity::update(float dT)
 {
-	if (isActive())
-	{
-		m_script->update(dT);
-		if (m_widget != nullptr)
-			m_widget->update(dT);
-	}
+	m_script->update(dT);
+	if (m_widget != nullptr)
+		m_widget->update(dT);
 }
 
 void Didax::Entity::input(const sf::Event& evt)
 {
-	if (isActive())
-	{
-		m_script->input(evt);
-		if (m_widget != nullptr)
-			m_widget->input(evt);
-	}
+	m_script->input(evt);
+	if (m_widget != nullptr)
+		m_widget->input(evt);
 }
 
 void Didax::Entity::kill()
 {
-	if (isActive())
-		m_script->kill();
+	m_script->kill();
 }
 
 void Didax::Entity::start()
 {
-	if (isActive())
-		m_script->start();
+	m_script->start();
 }
 
 Didax::Widget* Didax::Entity::createWidget(const std::string& name, int priority)
 {
 	try {
-		m_widget = WidgetJsonLoader::create(name, m_assets, m_parent, priority);
+		m_widget = WidgetJsonLoader::create(name, m_assets, m_parent, priority, this);
 		setPrority(priority);
 	}catch (const std::exception& e){
 		std::string E = e.what();
@@ -66,16 +58,6 @@ void Didax::Entity::setToKill()
 	m_toKill = true;
 }
 
-bool Didax::Entity::isVisible() const
-{
-	return m_isVisible;
-}
-
-void Didax::Entity::setVisible(bool v)
-{
-	m_isVisible = v;
-}
-
 int Didax::Entity::getPriority() const
 {
 	return m_priority;
@@ -85,16 +67,6 @@ void Didax::Entity::setPrority(int p)
 {
 	m_priority = p;
 	m_parent->sortEntities();
-}
-
-bool Didax::Entity::isActive() const
-{
-	return m_isActive;
-}
-
-void Didax::Entity::setActive(bool a)
-{
-	m_isActive = a;
 }
 
 std::string Didax::Entity::getName() const

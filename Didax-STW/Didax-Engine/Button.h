@@ -4,11 +4,13 @@
 namespace Didax
 {
 
+	class Entity;
+
 	class Button : public Widget
 	{
 	public:
 
-		Button(AssetManager* a);
+		Button(AssetManager* a, Entity*);
 
 	public:
 

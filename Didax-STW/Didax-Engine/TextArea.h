@@ -7,7 +7,7 @@
 
 namespace Didax
 {
-
+	class Entity;
 
 	class TextArea : public Widget
 	{
@@ -19,7 +19,7 @@ namespace Didax
 
 		//constructors
 
-		TextArea(AssetManager * a);
+		TextArea(AssetManager * a, Entity*);
 
 		//properties
 

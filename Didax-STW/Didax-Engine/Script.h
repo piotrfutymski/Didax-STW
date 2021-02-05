@@ -10,7 +10,7 @@ namespace Didax
 {
 	class Engine;
 
-	class Script_t : sf::Drawable
+	class Script_t
 	{
 	public:
 
@@ -21,9 +21,6 @@ namespace Didax
 	virtual void kill() = 0;
 
 	virtual void start() = 0;
-
-	protected:
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 
 	};
 
@@ -77,10 +74,6 @@ namespace Didax
 		}
 
 	protected:
-
-		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override
-		{
-		}
 
 	private:
 

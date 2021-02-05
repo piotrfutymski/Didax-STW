@@ -30,6 +30,8 @@ void Didax::Engine::run()
 		update();
 		render();
 		input();
+		if (m_close)
+			m_window.getWindow().close();
 	}
 	Logger::close();
 }
@@ -202,14 +204,12 @@ void Didax::Engine::update()
 	auto time = m_clock.getElapsedTime();
 	m_clock.restart();
 	m_deltaT = time.asSeconds();
-#ifdef _DEBUG
 	debClock -= m_deltaT;
 	if (debClock < 0)
 	{
 		std::cout << "Frames: " + std::to_string((int)(1.0f / m_deltaT)) << std::endl;
 		debClock = 1.0f;
 	}		
-#endif // DEBUG
 
 	for (auto& name : m_entitiesAdded)
 		m_priortyQueue.push_back(name);
@@ -256,4 +256,9 @@ void Didax::Engine::sortEntities()
 	std::sort(m_priortyQueue.begin(), m_priortyQueue.end(), [&](auto& left, auto& right) {
 		return m_entities[left]->getPriority() > m_entities[right]->getPriority();
 	});
+}
+
+void Didax::Engine::close()
+{
+	m_close = true;
 }
