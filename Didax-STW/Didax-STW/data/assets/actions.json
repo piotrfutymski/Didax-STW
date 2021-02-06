@@ -1,0 +1,194 @@
+{
+  "quickThrustACT": {
+    "type": "data",
+    "description": "",
+    "activity": "fight",
+    "subtype": "offensive",
+    "rarity": "normal",
+    "basic": [ 11, 2, 2 ],
+    "conditional": [ 3, 3, 3 ],
+    "onCond": {
+      "0": {
+        "conditions": {
+          "nextTo": "offensive"
+        },
+        "result": {
+          "addConditional": true
+        }
+      }
+    }
+  },
+  "bloodyBlowACT": {
+    "type": "data",
+    "description": "",
+    "activity": "fight",
+    "subtype": "offensive",
+    "rarity": "normal",
+    "basic": [ 15, 0, 0 ],
+    "conditional": [ 11, 0, 0 ],
+    "onCond": {
+      "0": {
+        "conditions": {
+          "nextTo": "offensive"
+        },
+        "result": {
+          "addConditional": true
+        }
+      }
+    }
+  },
+  "straightCutACT": {
+    "type": "data",
+    "description": "",
+    "activity": "fight",
+    "subtype": "offensive",
+    "rarity": "normal",
+    "basic": [ 10, 0, 0 ],
+    "conditional": [ 0, 0, 0 ],
+    "onBonus": ["offBonus0", 50, 13]
+  },
+  "parryACT": {
+    "type": "data",
+    "description": "",
+    "activity": "fight",
+    "subtype": "deffensive",
+    "rarity": "normal",
+    "basic": [ 2, 12, 0 ],
+    "conditional": [ 6, 6, 0 ],
+    "onCond": {
+      "0": {
+        "conditions": {
+          "count": [ "deffensive", 3 ]
+        },
+        "result": {
+          "addConditional": true
+        }
+      }
+    }
+  },
+  "dodgeACT": {
+    "type": "data",
+    "description": "",
+    "activity": "fight",
+    "subtype": "deffensive",
+    "rarity": "normal",
+    "basic": [ 0, 12, 2 ],
+    "conditional": [ 0, 6, 6 ],
+    "onCond": {
+      "0": {
+        "conditions": {
+          "count": [ "deffensive", 3 ]
+        },
+        "result": {
+          "addConditional": true
+        }
+      }
+    }
+  },
+  "takingTheBlowACT": {
+    "type": "data",
+    "description": "",
+    "activity": "fight",
+    "subtype": "deffensive",
+    "rarity": "normal",
+    "basic": [ 1, 10, 1 ],
+    "conditional": [ 0, 0, 0 ],
+    "onBonus": [ "deffBonus0", 20]
+  },
+  "earthPostureACT": {
+    "type": "data",
+    "description": "",
+    "activity": "fight",
+    "subtype": "posture",
+    "rarity": "normal",
+    "basic": [ 0, 2, 14 ],
+    "conditional": [ 0, 4, 4 ],
+    "onCond": {
+      "0": {
+        "conditions": {
+          "nextTo": "deffensive"
+        },
+        "result": {
+          "addConditional": true
+        }
+      }
+    }
+  },
+  "firePostureACT": {
+    "type": "data",
+    "description": "",
+    "activity": "fight",
+    "subtype": "posture",
+    "rarity": "normal",
+    "basic": [ 2, 0, 14 ],
+    "conditional": [ 4, 0, 4 ],
+    "onCond": {
+      "0": {
+        "conditions": {
+          "nextTo": "offensive"
+        },
+        "result": {
+          "addConditional": true
+        }
+      }
+    }
+  },
+  "backToPositionACT": {
+    "type": "data",
+    "description": "",
+    "activity": "fight",
+    "subtype": "posture",
+    "rarity": "normal",
+    "basic": [ 0, 0, 4 ],
+    "conditional": [ 0, 0, 0 ],
+    "onBonus": [ "posBonus0", 18 ]
+
+  },
+  "tauntACT": {
+    "type": "data",
+    "description": "",
+    "activity": "fight",
+    "subtype": "general",
+    "rarity": "normal",
+    "basic": [ 2, 2, 2 ],
+    "conditional": [ 0, 0, 0 ],
+    "onCond": {
+      "0": {
+        "conditions": {
+          "position": 1
+        },
+        "result": {
+          "add": [ 9, 0, 9 ]
+        }
+      },
+      "1": {
+        "conditions": {
+          "position": 4
+        },
+        "result": {
+          "add": [ 0, 9, 9 ]
+        }
+      }
+    }
+  },
+  "takeABreathACT": {
+    "type": "data",
+    "description": "",
+    "activity": "fight",
+    "subtype": "general",
+    "rarity": "silver",
+    "basic": [ 6, 6, 6 ],
+    "conditional": [ 7, 7, 7 ],
+    "onCond": {
+      "0": {
+        "conditions": {
+          "count": [ "deffensive", 1, "offensive", 1, "posture", 1 ]
+        },
+        "result": {
+          "addConditional": true
+        }
+      }
+    },
+    "PB": 2
+  }
+}

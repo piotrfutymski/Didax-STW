@@ -7,5 +7,8 @@
   },
   "widgets": {
     "path": "data/assets/widgets.json"
+  },
+  "actions": {
+    "path": "data/assets/actions.json"
   }
 }

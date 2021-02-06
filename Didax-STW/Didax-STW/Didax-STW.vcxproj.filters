@@ -13,18 +13,54 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\Interface">
+      <UniqueIdentifier>{7aad2048-caa3-4229-984e-6375def0ca27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Logic">
+      <UniqueIdentifier>{98257e96-a280-4c5c-b373-ea812570b178}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Interface">
+      <UniqueIdentifier>{1b238a8c-94b1-4074-a54a-ef922e7c6491}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Logic">
+      <UniqueIdentifier>{1a335d9f-fb94-4c27-9553-966a26773c7e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Pliki zasobów</Filter>
     </ClCompile>
     <ClCompile Include="RootFrame.cpp">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Pliki źródłowe\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Pliki źródłowe\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="Activity.cpp">
+      <Filter>Pliki źródłowe\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Pliki źródłowe\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="Hero.cpp">
+      <Filter>Pliki źródłowe\Logic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RootFrame.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki nagłówkowe\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Pliki nagłówkowe\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Activity.h">
+      <Filter>Pliki nagłówkowe\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Pliki nagłówkowe\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Hero.h">
+      <Filter>Pliki nagłówkowe\Logic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
