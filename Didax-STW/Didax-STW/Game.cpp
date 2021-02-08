@@ -49,7 +49,7 @@ Action* Game::getAction(const std::string& name)
 void Game::loadActions(const std::vector<std::string>& aNames)
 {
 	for (auto& x : aNames)
-		m_allActions.emplace(x, std::make_unique<Action>(m_assets->getAsset<Didax::DataAsset>(x)->data, x));
+		m_allActions.emplace(x, std::make_unique<Action>(m_assets->getAsset<Didax::DataAsset>(x)->data, x, this));
 }
 
 void Game::loadEnemies(const std::vector<std::string>& aNames)

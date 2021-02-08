@@ -1,14 +1,27 @@
 {
-  "textures": {
-    "path": "data/assets/textures.json"
+  "actions": {
+    "path": "data/assets/actions.json"
+  },
+  "activities": {
+    "path": "data/assets/activities.json"
+  },
+  "enemies": {
+    "path": "data/assets/enemies.json"
   },
   "fonts": {
     "path": "data/assets/fonts.json"
   },
+  "game": {
+    "path": "data/assets/game.json"
+  },
+  "hero": {
+    "path": "data/assets/hero.json"
+  },
+  "textures": {
+    "path": "data/assets/textures.json"
+  },
   "widgets": {
     "path": "data/assets/widgets.json"
-  },
-  "actions": {
-    "path": "data/assets/actions.json"
   }
+
 }

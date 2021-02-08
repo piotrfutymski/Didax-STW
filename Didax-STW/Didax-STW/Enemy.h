@@ -20,8 +20,8 @@ private:
 	std::string m_name;
 
 	bool m_disabling{ false };
-	StatusValues m_standardMinus;
-	StatusValues m_deviation;
+	StatusValues m_minValues;
+	StatusValues m_maxValues;
 
 	void swap(std::vector<std::string>& board, const StatusValues& status)const;
 	void addAction(std::vector<std::string>& board, const StatusValues& status)const;

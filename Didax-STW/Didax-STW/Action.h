@@ -6,6 +6,8 @@
 #include "Didax-Engine/Engine.h"
 #include "StatusValues.h"
 
+class Game;
+
 class Action
 {
 
@@ -14,72 +16,62 @@ public:
 		Normal, Silver, Gold
 	};
 
-	Action(const nlohmann::json & actionData, const std::string& nam);
+	Action(const nlohmann::json & actionData, const std::string& nam, Game * g);
 
 	StatusValues getUpgrade(const std::vector<std::string>& board, int pos);
 
 	StatusValues getBonus(const std::vector<std::string>& board, int pos, const StatusValues& actual, const StatusValues& gained);
 
 	int getBonusChanges(const std::vector<std::string>& board, int pos, const StatusValues& actual, const StatusValues& gained);
-
+	
+	//getters
 
 	int getPBcost()const;
 
-	std::wstring getName()const;
-
-	std::wstring getDescription()const;
-
-	std::wstring getActivity()const;
-
-	std::wstring getSubType()const;
+	std::string getName()const;
 
 	Rarity getRarity()const;
 
-	StatusValues getBasicValues()const;
-
-	StatusValues getConditionalValues()const;
-
-	StatusValues statusBaseUpgrade(const std::vector<Action*>& board, int pos)const;
-
-	StatusValues statusBonusUpgrade(const std::vector<Action*>& board, const StatusValues& actual, const StatusValues& gained, int pos) const;
-
-	bool equalSubType(const Action& rhs);
-
-	static bool condtionNextTo(const std::vector<Action*>& board, int pos, const std::string& stype);
-	static bool conditionCount(const std::vector<Action*>& board, int count, const std::string& stype);
-	static bool conditionCount(const std::vector<Action*>& board, const nlohmann::json& count);
-	static StatusValues bonusOff0(const StatusValues& gained, int valueMin, int value);
-	static StatusValues bonusPos0(const StatusValues& gained, int value);
-	static StatusValues bonusDeff0(const StatusValues& actual, int percent);
-	static StatusValues statusFromJsonTab(const nlohmann::json& tab);
+	std::string getType()const;
 
 private:
 
-	std::wstring m_name;
-	std::wstring m_description{};
-	std::wstring m_activity{};
-	std::wstring m_subtype{};
+	Game* m_game;
+
+	nlohmann::json m_data;
+	std::string m_name;
+	std::string m_activity;
+	std::string m_subtype;
 
 	Rarity m_rarity{Rarity::Normal};
+	int m_PBcost{ 0 };
 
-	StatusValues m_basic{0,0,0};
-	StatusValues m_conditional{0,0,0};
-
-	int m_PBcost{0};
+	StatusValues m_minValues{0,0,0};
+	StatusValues m_maxValues{0,0,0};
+	std::vector<std::pair<StatusValues, StatusValues>> m_conditional;
 
 private:
-
-	std::function< StatusValues(const std::vector<Action*>& board, int pos) > m_conditionalUpgrade;
-	std::function< StatusValues(const std::vector<Action*>& boatd, const StatusValues& actual, const StatusValues& gained, int pos)> m_bonusUbgrade;
 
 	void loadFromJson(const nlohmann::json& actionData);
 	void setRarity(const std::string& rar);
+	void loadConditional(const nlohmann::json& conditional);
+	StatusValues randValue(const StatusValues& mini, const StatusValues& maxi);
+
+	//upgrades
 	
-	std::wstring jsonToWstring(const nlohmann::json& str);
+	StatusValues upgradeValue(const std::vector<std::string>& board, int pos);
+	StatusValues nextToUpgrade(const nlohmann::json& info, const std::vector<std::string>& board, int pos);
+	StatusValues onPositionUpgrade(const nlohmann::json& info, const std::vector<std::string>& board, int pos);
+	StatusValues countUpgrade(const nlohmann::json& info, const std::vector<std::string>& board, int pos);
 
-	void addConditionalUpgrades(const nlohmann::json& onCond);
-	void addBonusUpgrades(const nlohmann::json& onBonus);
+	bool conditionNextToType(const std::string& type, int n, const std::vector<std::string>& board, int pos);
+	bool conditionNextToName(const std::string& name, const std::vector<std::string>& board, int pos);
+	bool conditionCount(const std::string& type, int n, const std::vector<std::string>& board, int pos);
 
+	//bonuses
+	
+	StatusValues bonusDef0(const nlohmann::json& info, const StatusValues& actual);
+	StatusValues bonusOff0(const nlohmann::json& info, const StatusValues& gained);
 
 
 };

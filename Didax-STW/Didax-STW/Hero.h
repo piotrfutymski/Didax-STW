@@ -13,7 +13,6 @@ public:
 
 	StatusValues getInitialStatus(Activity::ActivityType t)const;
 
-
 	int getPB()const;
 	bool minusPB(int v);
 
@@ -21,8 +20,9 @@ public:
 
 private:
 
-	Game* m_Game;
+	Game* m_game;
 
+	int m_maxPB{ 30 };
 	int m_PB{ 30 };
 	std::vector<std::string> m_actions;
 	Deck m_fightDeck;

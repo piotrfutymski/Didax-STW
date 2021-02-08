@@ -7,6 +7,8 @@ class Deck
 {
 public:
 
+	Deck();
+
 	Deck(Game* g, const std::vector<std::string> & initDeck, Activity::ActivityType t);
 
 	const std::vector<std::string>& getDeck()const;

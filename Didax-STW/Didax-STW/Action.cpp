@@ -1,185 +1,22 @@
 #include "Action.h"
-
-Action::Action(const nlohmann::json& actionData, const std::wstring& nam):m_name(nam)
-{
-	loadFromJson(actionData);
-}
-
-int Action::getPBcost() const
-{
-	return m_PBcost;
-}
-
-std::wstring Action::getName() const
-{
-	return m_name;
-}
-
-std::wstring Action::getDescription() const
-{
-	return m_description;
-}
-
-std::wstring Action::getActivity() const
-{
-	return m_activity;
-}
-
-std::wstring Action::getSubType() const
-{
-	return m_subtype;
-}
-
-Action::Rarity Action::getRarity() const
-{
-	return m_rarity;
-}
-
-Action::StatusValues Action::getBasicValues() const
-{
-	return m_basic;
-}
-
-Action::StatusValues Action::getConditionalValues() const
-{
-	return m_conditional;
-}
-
-Action::StatusValues Action::statusBaseUpgrade(const std::vector<Action*>& board, int pos) const
-{
-	if (m_conditionalUpgrade == nullptr)
-		return m_basic;
-	return m_basic + m_conditionalUpgrade(board, pos);
-}
-
-Action::StatusValues Action::statusBonusUpgrade(const std::vector<Action*>& board, const StatusValues& actual, const StatusValues& gained, int pos) const
-{
-	if (m_bonusUbgrade == nullptr)
-		return{ 0,0,0 };
-	return m_bonusUbgrade(board, actual, gained, pos);
-}
-
-bool Action::equalSubType(const Action& rhs)
-{
-	if (m_subtype == rhs.m_subtype)
-		return true;
-	return false;
-}
-
-bool Action::condtionNextTo(const std::vector<Action*>& board, int pos, const std::string& ype)
-{
-	std::wstring stype = { ype.begin(), ype.end() };
-	if (pos == 0)
-	{
-		if (board[1]->getSubType() == stype)
-			return true;
-		return false;
-	}
-	if (pos == board.size()-1)
-	{
-		if (board[board.size() - 2]->getSubType() == stype)
-			return true;
-		return false;
-	}
-	if (board[pos + 1]->getSubType() == stype || board[pos - 1]->getSubType() == stype)
-		return true;
-	return false;
-}
-
-bool Action::conditionCount(const std::vector<Action*>& board, int count, const std::string& ype)
-{
-	std::wstring stype = { ype.begin(), ype.end() };
-	int t = 0;
-	for (auto& x : board)
-	{
-		if (x->getSubType() == stype)
-			t++;
-	}
-	if (t >= count)
-		return true;
-	return false;
-}
-
-bool Action::conditionCount(const std::vector<Action*>& board, const nlohmann::json& count)
-{
-	for (size_t i = 0; i < count.size(); i+=2)
-	{
-		if (!conditionCount(board, count[i+1], count[i]))
-			return false;
-	}
-	return true;
-}
-
-Action::StatusValues Action::bonusOff0(const StatusValues& gained, int valueMin, int value)
-{
-	if (gained.first >= valueMin)
-		return { 0, value, value };
-	return { 0,0,0 };
-}
-
-
-Action::StatusValues Action::bonusPos0(const StatusValues& actual, int value)
-{
-	if (actual.first < actual.second && actual.first < actual.third)
-		return { value, 0 ,0 };
-	if(actual.second < actual.third && actual.second < actual.first)
-		return { 0, value ,0 };
-	if (actual.second > actual.third && actual.third < actual.first)
-		return { 0, 0 ,value };
-	if (actual.first == actual.second)
-	{
-		if(rand()%2)
-			return { value, 0 ,0 };
-		else
-			return { 0,value, 0 };
-	}
-	if (actual.first == actual.third)
-	{
-		if (rand() % 2)
-			return { value, 0 ,0 };
-		else
-			return { 0, 0, value };
-	}
-	else
-	{
-		if (rand() % 2)
-			return { 0, value ,0 };
-		else
-			return { 0, 0, value };
-	}
-}
-
-Action::StatusValues Action::bonusDeff0( const StatusValues& actual, int percent)
-{
-	if (actual.second > 100)
-	{
-		int w = ((actual.second - 100) * percent) / 100;
-		return { w, 0, w };
-	}
-	return{ 0,0,0 };
-		
-}
+#include "Game.h"
 
 void Action::loadFromJson(const nlohmann::json& actionData)
 {
-	if (!actionData.contains("activity") || !actionData.contains("subtype") || !actionData.contains("basic"))
+	if (!actionData.contains("activity") || !actionData.contains("subtype") || !actionData.contains("minValues") || !actionData.contains("maxValues"))
 	{
 		Didax::Logger::log("Unable to create action with name " + std::string{ m_name.begin(), m_name.end() }, Didax::Logger::Level::Warn);
 		return;
 	}
-	m_activity =  jsonToWstring(actionData["activity"]);
-	m_subtype = jsonToWstring(actionData["subtype"]);
-	m_basic = statusFromJsonTab(actionData["basic"]);
-	if (actionData.contains("description"))
-		m_description = jsonToWstring(actionData["description"]);
+	m_activity = actionData["activity"];
+	m_subtype = actionData["subtype"];
+	m_minValues = actionData["minValues"];
+	m_maxValues = actionData["maxValues"];
+	
 	if (actionData.contains("rarity"))
 		setRarity(actionData["rarity"]);
 	if (actionData.contains("conditional"))
-		m_conditional = statusFromJsonTab(actionData["conditional"]);
-	if (actionData.contains("onCond"))
-		addConditionalUpgrades(actionData["onCond"]);
-	if (actionData.contains("onBonus"))
-		addBonusUpgrades(actionData["onBonus"]);
+		loadConditional(actionData["conditional"]);
 }
 
 void Action::setRarity(const std::string& rar)
@@ -192,52 +29,205 @@ void Action::setRarity(const std::string& rar)
 		m_rarity = Rarity::Gold;
 }
 
-std::wstring Action::jsonToWstring(const nlohmann::json& str)
+void Action::loadConditional(const nlohmann::json& conditional)
 {
-	std::string r = str;
-	return std::wstring(r.begin(), r.end());
+	for (auto& x : conditional)
+		m_conditional.push_back({ StatusValues(x["minValues"]), StatusValues(x["maxValues"]) });
 }
 
-Action::StatusValues Action::statusFromJsonTab(const nlohmann::json& tab)
+StatusValues Action::upgradeValue(const std::vector<std::string>& board, int pos)
 {
-	return StatusValues{tab[0],tab[1],tab[2]};
+	if (!m_data.contains("upgrades"))
+		return {0,0,0};
+	StatusValues res;
+	for (auto& el : m_data["upgrades"].items())
+	{
+		if (el.value()["name"] == "nextTo")
+			res = res + nextToUpgrade(el.value(), board, pos);
+		else if (el.value()["name"] == "onPosition")
+			res = res + onPositionUpgrade(el.value(), board, pos);
+		else if (el.value()["name"] == "count")
+			res = res + countUpgrade(el.value(), board, pos);
+	}
+	return res;
 }
 
-void Action::addConditionalUpgrades(const nlohmann::json& onCond)
+StatusValues Action::nextToUpgrade(const nlohmann::json& info, const std::vector<std::string>& board, int pos)
 {
-	m_conditionalUpgrade = [&onCond](const std::vector<Action*>& board, int pos) {
-		Action::StatusValues res{ 0, 0 ,0 };
-		for (auto& bonus : onCond)
+	bool adder = true;
+	for (int i = 0; i < info["types"].size(); i+=2)
+	{
+		if (!conditionNextToType(info["types"][i], info["types"][i + 1L], board, pos))
 		{
-			bool addBonusFlag = true;
-			if (bonus["conditions"].contains("count"))
-				addBonusFlag = addBonusFlag && Action::conditionCount(board, (const nlohmann::json &)(bonus["conditions"]["count"]));
-			if (bonus["conditions"].contains("nextTo"))
-				addBonusFlag = addBonusFlag && Action::condtionNextTo(board, pos, bonus["conditions"]["nextTo"]);
-			if(bonus["conditions"].contains("position"))
-				addBonusFlag = addBonusFlag && (pos == bonus["conditions"]["position"] - 1);
-			if (!addBonusFlag)
-				continue;
-
-			if (bonus["result"].contains("add"))
-				res = res + Action::statusFromJsonTab(bonus["result"]["add"]);
-			if(bonus["result"].contains("addConditional") && bonus["result"]["addConditional"])
-				res = res + board[pos]->getConditionalValues();				
+			adder = false;
+			break;
+		}	
+	}
+	for (int i = 0; i < info["names"].size(); i++)
+	{
+		if (!conditionNextToName(info["names"][i], board, pos))
+		{
+			adder = false;
+			break;
 		}
-		return res;
-	};
+	}
+	if (!adder)
+		return {0,0,0};
+	return randValue(m_conditional[info["reward"]].first, m_conditional[info["reward"]].second);
 }
 
-void Action::addBonusUpgrades(const nlohmann::json& onBonus)
+StatusValues Action::onPositionUpgrade(const nlohmann::json& info, const std::vector<std::string>& board, int pos)
 {
-	m_bonusUbgrade = [&onBonus](const std::vector<Action*>& boatd, const StatusValues& actual, const StatusValues& gained, int pos) {
-		Action::StatusValues res{ 0, 0 ,0 };
-		if (onBonus[0] == "offBonus0")
-			return Action::bonusOff0(gained, onBonus[1], onBonus[2]);
-		if (onBonus[0] == "deffBonus0")
-			return Action::bonusDeff0(actual, onBonus[1]);
-		if (onBonus[0] == "posBonus0")
-			return Action::bonusPos0(actual, onBonus[1]);
-		return res;
-	};
+	if(!pos == info["position"])
+		return { 0,0,0 };
+	return randValue(m_conditional[info["reward"]].first, m_conditional[info["reward"]].second);
+}
+
+StatusValues Action::countUpgrade(const nlohmann::json& info, const std::vector<std::string>& board, int pos)
+{
+	bool adder = true;
+	for (int i = 0; i < info["types"]; i += 2)
+	{
+		if (!conditionCount(info["types"][i], info["types"][i+1L],board, pos))
+		{
+			adder = false;
+			break;
+		}
+	}
+	if (!adder)
+		return { 0,0,0 };
+	return randValue(m_conditional[info["reward"]].first, m_conditional[info["reward"]].second);
+}
+
+bool Action::conditionNextToType(const std::string& type, int n, const std::vector<std::string>& board, int pos)
+{
+	std::vector<std::string> types{ board.size() };
+	for (int i = 0; i < board.size(); i++)
+	{
+		types[i] = m_game->getAction(board[i])->getType();
+	}
+	if (n == 1)
+	{
+		return conditionNextToName(type, types, pos);
+	}
+	else if (n == 2)
+	{
+		if (pos == 0 || pos == board.size() - 1)
+			return false;
+		if (types[pos - 1L] == type && types[pos + 1L] == type)
+			return true;
+	}
+	return false;
+}
+
+bool Action::conditionNextToName(const std::string& name, const std::vector<std::string>& board, int pos)
+{
+	if (pos == 0)
+	{
+		if (board[1] == name)
+			return true;
+	}
+	else if (pos == board.size() - 1)
+	{
+		if (board[board.size() - 2] == name)
+			return true;
+	}
+	else
+	{
+		if (board[pos + 1L] == name || board[pos - 1L] == name)
+			return true;
+	}
+	return false;
+}
+
+bool Action::conditionCount(const std::string& type, int n, const std::vector<std::string>& board, int pos)
+{
+	int t = 0;
+	for (auto& x : board)
+	{
+		if (m_game->getAction(x)->getType() == type)
+			t++;
+	}
+	if (t >= n)
+		return true;
+	return false;
+}
+
+StatusValues Action::bonusDef0(const nlohmann::json& info, const StatusValues& actual)
+{
+	if (actual.second > 100)
+	{
+		int w = ((actual.second - 100) * info["percent"]) / 100;
+		return { w, 0, w };
+	}
+	return{ 0,0,0 };
+}
+
+StatusValues Action::bonusOff0(const nlohmann::json& info, const StatusValues& gained)
+{
+	if (gained.first >= info["minValue"])
+		return { 0, info["value"], info["value"] };
+	return { 0,0,0 };
+}
+
+StatusValues Action::randValue(const StatusValues& mini, const StatusValues& maxi)
+{
+	auto range = maxi - mini;
+	int first = (rand() % 100) * range.first / 100;
+	int second = (rand() % 100) * range.second / 100;
+	int third = (rand() % 100) * range.third / 100;
+	return mini + StatusValues{ first, second, third }; 
+}
+////////////////
+Action::Action(const nlohmann::json& data, const std::string& nam, Game* g) :m_data{ data }, m_name{ nam }, m_game{ g }
+{
+	loadFromJson(data);
+}
+
+StatusValues Action::getUpgrade(const std::vector<std::string>& board, int pos)
+{
+	return randValue(m_minValues, m_maxValues) + upgradeValue(board, pos);
+}
+
+StatusValues Action::getBonus(const std::vector<std::string>& board, int pos, const StatusValues& actual, const StatusValues& gained)
+{
+	if (!m_data.contains("bonus"))
+		return { 0,0,0 };
+
+	if (m_data["bonus"] = "off0")
+		return bonusOff0(m_data["bonus"], gained);
+	else if (m_data["bonus"] = "def0")
+		return bonusDef0(m_data["bonus"], actual);
+
+	return{ 0,0,0 };
+}
+
+int Action::getBonusChanges(const std::vector<std::string>& board, int pos, const StatusValues& actual, const StatusValues& gained)
+{
+	if (!m_data.contains("bonus"))
+		return 0;
+
+	if (m_data["bonus"] = "pos0")
+		return 1;
+	return 0;
+}
+
+int Action::getPBcost() const
+{
+	return m_PBcost;
+}
+
+std::string Action::getName() const
+{
+	return m_name;
+}
+
+Action::Rarity Action::getRarity() const
+{
+	return m_rarity;
+}
+
+std::string Action::getType() const
+{
+	return m_subtype;
 }

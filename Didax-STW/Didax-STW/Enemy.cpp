@@ -3,8 +3,8 @@
 Enemy::Enemy(const nlohmann::json& enemyData, const std::string& nam):m_data{enemyData}, m_name{nam}
 {
 	m_disabling = m_data["disabling"];
-	m_standardMinus = m_data["minus"];
-	m_deviation = m_data["deviation"];
+	m_minValues = m_data["minValues"];
+	m_maxValues = m_data["maxValues"];
 }
 
 void Enemy::play(std::vector<std::string>& board, const StatusValues& status) const
@@ -24,11 +24,11 @@ bool Enemy::disablingSpecial() const
 
 StatusValues Enemy::getMinus(const StatusValues& status) const
 {
-	auto base = m_standardMinus - m_deviation / 2;
-	int first = (rand() % 100) * m_deviation.first/100;
-	int second = (rand() % 100) * m_deviation.second/100;
-	int third = (rand() % 100) * m_deviation.third/100;
-	return base + StatusValues{first, second, third};
+	auto range = m_maxValues - m_minValues;
+	int first = (rand() % 100) * range.first/100;
+	int second = (rand() % 100) * range.second/100;
+	int third = (rand() % 100) * range.third/100;
+	return m_minValues + StatusValues{first, second, third};
 }
 
 void Enemy::swap(std::vector<std::string>& board, const StatusValues& status) const

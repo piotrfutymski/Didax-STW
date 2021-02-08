@@ -271,11 +271,11 @@ Activity::ActivityType Activity::getType() const
 
 void Activity::initTypeFromString(const std::string& t)
 {
-	if (t == "Fight")
+	if (t == "fight")
 		m_type = ActivityType::Fight;
-	else if (t == "Exploration")
+	else if (t == "exploration")
 		m_type = ActivityType::Exploration;
-	else if (t == "Talk")
+	else if (t == "talk")
 		m_type = ActivityType::Talk;
 }
 
