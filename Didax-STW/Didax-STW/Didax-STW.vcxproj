@@ -151,10 +151,14 @@
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="Activity.cpp" />
+    <ClCompile Include="Deck.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RootFrame.cpp" />
+    <ClCompile Include="StatusValues.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Didax-Engine\Didax-Engine.vcxproj">
@@ -164,9 +168,13 @@
   <ItemGroup>
     <ClInclude Include="Action.h" />
     <ClInclude Include="Activity.h" />
+    <ClInclude Include="Deck.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameSettings.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="RootFrame.h" />
+    <ClInclude Include="StatusValues.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

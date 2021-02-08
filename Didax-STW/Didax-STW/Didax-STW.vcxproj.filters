@@ -45,6 +45,18 @@
     <ClCompile Include="Hero.cpp">
       <Filter>Pliki źródłowe\Logic</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Pliki źródłowe\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSettings.cpp">
+      <Filter>Pliki źródłowe\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="Deck.cpp">
+      <Filter>Pliki źródłowe\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusValues.cpp">
+      <Filter>Pliki źródłowe\Logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RootFrame.h">
@@ -60,6 +72,18 @@
       <Filter>Pliki nagłówkowe\Logic</Filter>
     </ClInclude>
     <ClInclude Include="Hero.h">
+      <Filter>Pliki nagłówkowe\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Pliki nagłówkowe\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSettings.h">
+      <Filter>Pliki nagłówkowe\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Deck.h">
+      <Filter>Pliki nagłówkowe\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusValues.h">
       <Filter>Pliki nagłówkowe\Logic</Filter>
     </ClInclude>
   </ItemGroup>

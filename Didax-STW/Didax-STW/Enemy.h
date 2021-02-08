@@ -6,17 +6,26 @@ class Enemy
 {
 public:
 
-	std::wstring getName()const;
+	Enemy(const nlohmann::json& enemyData, const std::string& nam);
 
-	Action::StatusValues getStatusValuesDown()const;
+	void play(std::vector<std::string>& board, const StatusValues & status)const; 
+
+	bool disablingSpecial()const;
+
+	StatusValues getMinus(const StatusValues& status)const;
 
 private:
 
-	std::wstring m_name{ L"wolf" };
-	std::wstring m_activity{ L"fight" };
+	nlohmann::json m_data;
+	std::string m_name;
 
-	Action::StatusValues m_min{15,25,15};
-	Action::StatusValues m_range{10,10,10};
+	bool m_disabling{ false };
+	StatusValues m_standardMinus;
+	StatusValues m_deviation;
+
+	void swap(std::vector<std::string>& board, const StatusValues& status)const;
+	void addAction(std::vector<std::string>& board, const StatusValues& status)const;
+	void reverse(std::vector<std::string>& board, const StatusValues& status)const;
 
 };
 

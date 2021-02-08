@@ -1,0 +1,8 @@
+{
+  "testACT": {
+    "type": "data",
+    "activityType": "fight",
+    "enemy": "",
+    "descWidg": ""
+  }
+}

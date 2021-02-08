@@ -111,11 +111,8 @@ void Didax::WidgetJsonLoader::initTextArea(Widget* w, nlohmann::json& widgData, 
 		txt->setBackgroundColor(r, g, b, 255);
 	}
 	if (widgData.contains("text"))
-	{
-		std::string text = widgData["text"];
-		std::wstring wtext(text.begin(), text.end());
-		txt->setText(sf::String(wtext));
-	}
+		txt->setText(DataLoader::sfStringFromJson(widgData["text"]));
+
 	if (widgData.contains("fontcolor"))
 	{
 		int r = widgData["fontcolor"][0];

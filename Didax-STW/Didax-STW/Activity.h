@@ -1,50 +1,141 @@
 #pragma once
 #include "Action.h"
-#include "Hero.h"
 #include "Enemy.h"
+#include "StatusValues.h"
 
+#include <nlohmann/json.hpp>
+
+class Game;
+class Hero;
 
 class Activity
 {
 public:
-	Activity(Hero* hero, Enemy * enemy);
 
-	const std::vector<Action*>& getOnHandActions()const;
+	enum class ActivityType {
+		Fight, Talk, Exploration
+	};
 
-	const std::vector<Action*>& getOnBoardActions()const;
+	enum class State {
+		PlayerChoosing, EnemyChoosing, Upgrading, Bonuses, EnemyMinus, Ending
+	};
 
-	Action::StatusValues getStatus()const;
 
-	Action::StatusValues getHeroAddedStatus()const;
+	Activity(const nlohmann::json& data, Hero* hero, Game* game);
 
-	Action::StatusValues geEnemyRemovedStatus()const;
+	bool finished()const;
 
-	void startTurn();
+	bool won()const;
+
+	//base options
+
+	bool canChangeAction()const;
+
+	void changeAction(int num);
 
 	void setOnBoard(int handPos, int boardPos);
 
 	void removeFromBoard(int handPos, int boardPos);
 
+	//special options
+
+	bool canMakeFightSpecial(int num)const;
+
+	bool fightSpecial(int num);
+
+	bool canMakeTalkSpecial()const;
+
+	void talkSpecial(int num);
+
+	void backTalkSpecial(int num);
+
+	// turn end
+
+	bool canEndTurn()const;
+
 	void acceptBoard();
 
-	Action::StatusValues playAction(int pos);
-
-	Action::StatusValues playBonus(int pos);
+	//enemy moves
 
 	void playEnemy();
 
+	//calculations
+
+	bool isNextUpgrade()const;
+
+	StatusValues nextUpgrade();
+
+	bool isNextBonus()const;
+
+	StatusValues nextBonus();
+
+	bool isEnemy()const;
+
+	StatusValues enemyMinus();
+	
+	// next Turn
+
+	void nextTurn();
+
+	//geters
+
+	const std::vector<std::string>& getOnHandActions()const;
+
+	const std::vector<std::string>& getOnBoardActions()const;
+
+	StatusValues getBeginTurnStatus()const;
+
+	StatusValues getActualStatus()const;
+	
+	int getChangeStacks()const;
+
+	std::string getEnemy()const;
+
+	std::string getDescription()const;
+
+	ActivityType getType()const;
+
+	int getPBCostOfBoard()const;
 
 private:
-	bool m_chosingActions{ true };
+
+	ActivityType m_type;
+
+	// table objects
+
+	std::string m_enemy;
+	std::string m_descriptionWidg;
+	
+	StatusValues m_actualStatus;
+	StatusValues m_beginTurnStatus;
+	StatusValues m_upgradeGained;
+
+	int m_changeStacks{ 0 };
+
+	std::vector<std::string> m_onHandActions{ 6 };
+	std::vector<std::string> m_onBoardActions{ 4 };
+
+	// game
+
 	Hero* m_hero;
-	Enemy* m_enemy;
-	std::vector<Action*> m_onHandActions;
+	Game* m_game;
 
-	std::vector<Action*> m_onBoardActions;
+	//state
 
-	Action::StatusValues m_status{ 50,50,50 };
-	Action::StatusValues m_heroAdded;
-	Action::StatusValues m_enemyRemoved;
+	State m_state{ State::PlayerChoosing };
+	int m_numOfNextAction{ 0 };
+	bool m_finished{ false };
+	bool m_won{ false };
+	std::vector<int> talkToStay;
+
+	bool m_disablingEnemy{ false };
+
+private:
+
+	void initTypeFromString(const std::string& t);
+	void randBoard();
+	std::string randAction();
+	int statusesbiggerEqual100()const;
 
 };
 

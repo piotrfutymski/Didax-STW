@@ -1,0 +1,9 @@
+{
+  "GAME": {
+    "type":  "data",
+    "actions": [],
+    "enemies": [],
+    "scenarios": [],
+    "items": []
+  }
+}

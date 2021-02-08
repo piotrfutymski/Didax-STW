@@ -4,6 +4,7 @@
 #include <functional>
 
 #include "Didax-Engine/Engine.h"
+#include "StatusValues.h"
 
 class Action
 {
@@ -13,32 +14,14 @@ public:
 		Normal, Silver, Gold
 	};
 
-	struct StatusValues
-	{
-		int first;
-		int second;
-		int third;
+	Action(const nlohmann::json & actionData, const std::string& nam);
 
-		StatusValues operator+(const StatusValues& rhs)const
-		{
-			StatusValues res;
-			res.first = first + rhs.first;
-			res.second = second + rhs.second;
-			res.third = third + rhs.third;
-			return res;
-		}
+	StatusValues getUpgrade(const std::vector<std::string>& board, int pos);
 
-		StatusValues operator-(const StatusValues& rhs)const
-		{
-			StatusValues res;
-			res.first = first - rhs.first;
-			res.second = second - rhs.second;
-			res.third = third - rhs.third;
-			return res;
-		}
-	};
+	StatusValues getBonus(const std::vector<std::string>& board, int pos, const StatusValues& actual, const StatusValues& gained);
 
-	Action(const nlohmann::json & actionData, const std::wstring& nam);
+	int getBonusChanges(const std::vector<std::string>& board, int pos, const StatusValues& actual, const StatusValues& gained);
+
 
 	int getPBcost()const;
 
