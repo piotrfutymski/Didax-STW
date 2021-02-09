@@ -22,11 +22,14 @@ class Engine;
 		void start();
 
 		template<typename GameObject, typename... Args>
-		void init(Args&&...args)
+		void addScript(Args&&...args)
 		{
 			std::unique_ptr<Script<GameObject>> scr = std::make_unique<Script<GameObject>>(m_parent);
 			scr->init(std::forward<Args>(args)...);
 			m_script = std::move(scr);
+			if constexpr (detail::has_setMe<GameObject, void(Entity*)>::value)
+				getScript<GameObject>()->setMe(this);
+			start();
 		}
 
 		template<typename T>
@@ -56,11 +59,11 @@ class Engine;
 		void removeWidget();
 
 		template<typename T>
-		Script<T>* getScript()
+		T* getScript()
 		{
 			if (m_script == nullptr)
 				return nullptr;
-			return static_cast<Script<T>*>(m_script.get());
+			return static_cast<Script<T>*>(m_script.get())->getGameObject();
 		}
 
 
@@ -68,7 +71,7 @@ class Engine;
 		void setToKill();
 
 		int getPriority()const;
-		void setPrority(int p);
+		void setPriority(int p);
 
 		std::string getName()const;
 

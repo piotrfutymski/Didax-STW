@@ -34,7 +34,7 @@ Didax::Widget* Didax::Entity::createWidget(const std::string& name, int priority
 {
 	try {
 		m_widget = WidgetJsonLoader::create(name, m_assets, m_parent, priority, this);
-		setPrority(priority);
+		setPriority(priority);
 	}catch (const std::exception& e){
 		std::string E = e.what();
 		Logger::log("Can't create widget - reason: " + E);
@@ -63,7 +63,7 @@ int Didax::Entity::getPriority() const
 	return m_priority;
 }
 
-void Didax::Entity::setPrority(int p)
+void Didax::Entity::setPriority(int p)
 {
 	m_priority = p;
 	m_parent->sortEntities();

@@ -14,7 +14,13 @@ void Didax::Canvas::setTexture(const std::string& name)
 	}
 	m_backgroundSprite.setTexture(t->texture);
 	m_bType = BackgroundType::Image;
+	m_texture = name;
 	updateSize();
+}
+
+std::string Didax::Canvas::getTexture()
+{
+	return m_texture;
 }
 
 void Didax::Canvas::setRect()

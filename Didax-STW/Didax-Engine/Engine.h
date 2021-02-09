@@ -67,10 +67,7 @@ namespace Didax
         {
             m_entities[name] = std::move(std::make_unique<Entity>(this, name));
             m_entitiesAdded.push_back(name);
-            m_entities[name]->init<T>(std::forward<Args>(args)...);
-            if constexpr (detail::has_setMe<T, void(Entity_ptr)>::value)
-                m_entities[name]->getScript<T>()->getGameObject()->setMe(m_entities[name].get());
-            m_entities[name]->start();
+            m_entities[name]->addScript<T>(std::forward<Args>(args)...);
             return m_entities[name].get();
         }
 

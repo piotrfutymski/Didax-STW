@@ -17,6 +17,8 @@ namespace Didax
 
 		void setTexture(const std::string & name);
 
+		std::string getTexture();
+
 		void setRect();
 
 		void unsetBackground();
@@ -26,6 +28,7 @@ namespace Didax
 		sf::RectangleShape m_backgroundRect;
 
 		sf::Sprite m_backgroundSprite;
+		std::string m_texture = "";
 
 		BackgroundType m_bType{ BackgroundType::None };
 		

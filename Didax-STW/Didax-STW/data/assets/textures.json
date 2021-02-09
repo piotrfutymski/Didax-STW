@@ -12,20 +12,20 @@
     "path": "data/graphix/test1.bmp"
   },
   "MainMenuBackground": {
-	"type": "texture",
-	"path": "data/graphix/MainMenuBackground.bmp"
+    "type": "texture",
+    "path": "data/graphix/MainMenuBackground.bmp"
   },
   "MainMenuWood": {
-	"type": "texture",
-	"path": "data/graphix/MainMenuWood.bmp"
+    "type": "texture",
+    "path": "data/graphix/MainMenuWood.bmp"
   },
   "MainMenuPaper": {
-	"type": "texture",
-	"path": "data/graphix/MainMenuPaper.bmp"
+    "type": "texture",
+    "path": "data/graphix/MainMenuPaper.bmp"
   },
   "ButtonLeather": {
-	"type": "texture",
-	"path": "data/graphix/ButtonLeather.bmp"
+    "type": "texture",
+    "path": "data/graphix/ButtonLeather.bmp"
   },
   "arrowCUR": {
     "type": "texture",
@@ -38,5 +38,30 @@
   "loadingCUR": {
     "type": "texture",
     "path": "data/graphix/loadingCUR.bmp"
+  },
+  "blokAKC": {
+    "type": "texture",
+    "path": "data/graphix/blokAKC.bmp"
+  },
+  "ciosAKC": {
+    "type": "texture",
+    "path": "data/graphix/ciosAKC.bmp"
+  },
+  "doskokAKC": {
+    "type": "texture",
+    "path": "data/graphix/doskokAKC.bmp"
+  },
+  "krwawyCiosAKC": {
+    "type": "texture",
+    "path": "data/graphix/krwawyCiosAKC.bmp"
+  },
+  "parowanieAKC": {
+    "type": "texture",
+    "path": "data/graphix/parowanieAKC.bmp"
+  },
+  "unikAKC": {
+    "type": "texture",
+    "path": "data/graphix/unikAKC.bmp"
   }
+
 }

@@ -21,7 +21,7 @@ std::unique_ptr<Didax::Widget> Didax::WidgetJsonLoader::create(const std::string
 	if (widgData.contains("children"))
 	{
 		for (auto& c : widgData["children"])
-			addChild(res.get(), c, a, eng, priority + 1);
+			addChild(res.get(), c, a, eng, priority + 10);
 	}
 	return std::move(res);
 }

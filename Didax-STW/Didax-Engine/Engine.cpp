@@ -83,6 +83,15 @@ Didax::Entity_ptr Didax::Engine::getEntity(const std::string& name)
 Didax::Entity_ptr Didax::Engine::removeEntity(const std::string& name)
 {
 	m_entities[name]->setToKill();
+	auto w = m_entities[name]->getWidget();
+	if (w != nullptr)
+	{
+		for (auto c : w->getChildren())
+			c->getEntity()->setToKill();
+		if (w->getParent() != nullptr)
+			w->getParent()->removeChild(w);
+
+	}
 	return m_entities[name].get();
 }
 
@@ -215,9 +224,9 @@ void Didax::Engine::update()
 		m_priortyQueue.push_back(name);
 	if (m_entitiesAdded.size() != 0)
 		sortEntities();
-	for (auto& name : m_priortyQueue)
-		m_entities[name]->update(m_deltaT);
 	m_entitiesAdded = {};
+	for (auto& name : m_priortyQueue)
+		m_entities[name]->update(m_deltaT);	
 	for (auto it = m_entities.begin(); it != m_entities.end(); )
 	{
 		if ((*it).second->getToKill())

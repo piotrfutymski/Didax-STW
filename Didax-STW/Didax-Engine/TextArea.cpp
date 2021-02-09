@@ -86,7 +86,7 @@ sf::Vector2f Didax::TextArea::getMargin() const
 void Didax::TextArea::setMargin(const sf::Vector2f& m)
 {
 	m_margin = m;
-	recalculateLinesPositions();
+	recalculateLines();
 }
 
 Didax::TextArea::Alaign Didax::TextArea::getAlaign() const

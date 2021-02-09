@@ -423,11 +423,11 @@ void Didax::Widget::updateEvents()
 		m_isHovered = false;
 		m_callbacks.push_back(CallbackType::onHoverOut);
 	}
-	if (m_isPressed && !isMouseIn())
+	/*if (m_isPressed && !isMouseInn)
 	{
 		m_isPressed = false;
 		m_callbacks.push_back(CallbackType::onRelease);
-	}
+	}*/
 }
 
 void Didax::Widget::drawOnly(sf::RenderTarget& target, sf::RenderStates states) const
