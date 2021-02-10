@@ -62,6 +62,10 @@
   "unikAKC": {
     "type": "texture",
     "path": "data/graphix/unikAKC.bmp"
+  },
+  "AKCdoskok": {
+    "type": "texture",
+    "path": "data/graphix/AKCdoskok.bmp"
   }
 
 }

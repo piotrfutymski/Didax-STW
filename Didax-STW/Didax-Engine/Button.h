@@ -20,15 +20,18 @@ namespace Didax
 
 		void setHoverMask(const sf::Color& c);
 		void setClickedMask(const sf::Color& c);
+		void setStandardMask(const sf::Color& c);
 		sf::Color getHoverMask()const;
 		sf::Color getClickedMask()const;
+		sf::Color getStandardMask()const;
 
 	private:
 
 		sf::Sprite m_sprite;
 
-		sf::Color m_hoverColorMask{ 200, 200, 200, 255 };
-		sf::Color m_clickedColorMask{ 150, 150, 150, 255 };
+		sf::Color m_standardColorMask{ 175, 175, 175, 255 };
+		sf::Color m_hoverColorMask{ 255, 255, 255, 255 };
+		sf::Color m_clickedColorMask{255, 255, 255, 255 };
 
 		bool m_textureSet{ false };
 

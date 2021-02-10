@@ -53,7 +53,7 @@ void DragAndDrop::onUpdate(Didax::Engine* e)
 		{
 			if (newToChange == -1)
 			{
-				m_shadow->getWidget<Didax::Canvas>()->setTexture(dragged->getWidget<Didax::Canvas>()->getTexture());
+				//m_shadow->getWidget<Didax::Canvas>()->setTexture(dragged->getWidget<Didax::Canvas>()->getTexture());
 				if (m_Marker != nullptr)
 				{
 					e->removeEntity(m_Marker->getName());
@@ -64,15 +64,16 @@ void DragAndDrop::onUpdate(Didax::Engine* e)
 			{
 				if(m_Marker != nullptr)
 					e->removeEntity(m_Marker->getName());
-				m_shadow->getWidget<Didax::Canvas>()->setTexture(m_items[newToChange]->getWidget<Didax::Canvas>()->getTexture());
+				//if(m_shadow != nullptr && m_items[newToChange] != nullptr)
+					//m_shadow->getWidget<Didax::Canvas>()->setTexture(m_items[newToChange]->getWidget<Didax::Canvas>()->getTexture());
 				m_Marker = e->addEntity();
 				auto c = m_Marker->createWidget<Didax::Canvas>();
-				m_Marker->setPriority(m_items[newToChange]->getPriority() + 1);
+				m_Marker->setPriority(m_me->getPriority() + 101);
 				m_me->getWidget()->addChild(c);
 				c->setPosition(m_itemPositions[newToChange]);
 				c->setSize(m_itemSize);
 				c->setRect();
-				c->setColor(sf::Color(120, 120, 50, 150));
+				c->setColor(sf::Color(189, 120,25, 127));
 			}
 			m_toChange = newToChange;
 		}	
@@ -100,6 +101,7 @@ void DragAndDrop::addItem(Didax::Entity_ptr item, int pos)
 			onRelease(w, item);
 			item->getScript<Item>()->onRelease();
 		});
+		m_me->getWidget()->addChild(item->getWidget());
 		item->getWidget()->setPosition(m_itemPositions[pos]);
 		item->getWidget()->setSize(m_itemSize);
 		item->setPriority(m_me->getPriority() + 100);
@@ -125,7 +127,7 @@ void DragAndDrop::onClick(Didax::Widget* w, Didax::Entity_ptr i)
 {
 	m_startingMousePos = Didax::Input::getMousePosition();
 	auto it = std::find(m_items.begin(), m_items.end(), i);
-	m_dragged = std::distance(m_items.begin(), it);
+	m_dragged = (int)(std::distance(m_items.begin(), it));
 	auto itemWidg = i->getWidget<Didax::Canvas>();
 	i->setPriority(i->getPriority() + 2);
 	m_shadow = m_eng->addEntity();
@@ -142,7 +144,7 @@ void DragAndDrop::onRelease(Didax::Widget* w, Didax::Entity_ptr i)
 {
 	if (m_toChange == -1)
 	{
-		w->setPositionInTime(m_itemPositions[m_dragged], 0.1);
+		w->setPositionInTime(m_itemPositions[m_dragged], 0.1f);
 	}
 	else
 	{
@@ -152,10 +154,10 @@ void DragAndDrop::onRelease(Didax::Widget* w, Didax::Entity_ptr i)
 		m_items[m_dragged] = s;
 		if (s != nullptr)
 		{
-			s->getWidget()->setPositionInTime(m_itemPositions[m_dragged], 0.1);
+			s->getWidget()->setPositionInTime(m_itemPositions[m_dragged], 0.1f);
 		}
 	}
-	i->setPriority(i->getPriority() - 1);
+	i->setPriority(i->getPriority() - 2);
 	if (m_Marker != nullptr)
 	{
 		m_eng->removeEntity(m_Marker->getName());
@@ -167,11 +169,19 @@ void DragAndDrop::onRelease(Didax::Widget* w, Didax::Entity_ptr i)
 
 int DragAndDrop::findDraggedReplace()
 {
+	auto mousePos = Didax::Input::getMousePosition();
+	auto abs = m_me->getWidget()->getAbsolutePosition();
 	for (int i =0; i < m_itemPositions.size(); i++)
 	{
 		if (i == m_dragged)
 			continue;
-		if (m_items[i]->getWidget()->isHovered())
+		else if (m_items[i] == nullptr)
+		{
+			if (mousePos.x > m_itemPositions[i].x + abs.x && mousePos.y > m_itemPositions[i].y + abs.y &&
+				mousePos.x <= m_itemPositions[i].x + m_itemSize.x + abs.x && mousePos.y <= m_itemPositions[i].y + m_itemSize.y + abs.y)
+				return i;
+		}
+		else if (m_items[i]->getWidget()->isHovered())
 			return i;
 	}
 	return -1;

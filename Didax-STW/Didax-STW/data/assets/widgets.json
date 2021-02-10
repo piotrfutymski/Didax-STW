@@ -57,7 +57,7 @@
     },
 	"info": {
     "positions": [ 20, 20, 100, 20, 180, 20, 260, 20, 340, 20, 420, 20 ],
-    "textures": [ "blokAKC", "ciosAKC", "doskokAKC", "krwawyCiosAKC", "parowanieAKC", "unikAKC" ]
+    "textures": [ "AKCdoskok", "doskokAKC", "doskokAKC", "doskokAKC", "doskokAKC", "unikAKC" ]
 	}
   },
   "NewCampaignButtonWIDG": {

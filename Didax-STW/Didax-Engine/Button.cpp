@@ -29,6 +29,12 @@ void Didax::Button::setClickedMask(const sf::Color& c)
 	this->updateColor();
 }
 
+void Didax::Button::setStandardMask(const sf::Color& c)
+{
+	m_standardColorMask = c;
+	this->updateColor();
+}
+
 sf::Color Didax::Button::getHoverMask() const
 {
 	return m_hoverColorMask;
@@ -37,6 +43,11 @@ sf::Color Didax::Button::getHoverMask() const
 sf::Color Didax::Button::getClickedMask() const
 {
 	return m_clickedColorMask;
+}
+
+sf::Color Didax::Button::getStandardMask() const
+{
+	return m_standardColorMask;
 }
 
 void Didax::Button::_update(float deltaT)
@@ -86,6 +97,6 @@ void Didax::Button::updateColor()
 	else if (m_isHovered)
 		mask = m_hoverColorMask;
 	else
-		mask = sf::Color::White;
+		mask = m_standardColorMask;
 	m_sprite.setColor(m_color * mask);
 }

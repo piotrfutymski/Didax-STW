@@ -20,12 +20,11 @@ public:
 		}
 		dragAndDrop = e->getEntity("TestDragandDropWIDG");
 		dragAndDrop->addScript<DragAndDrop>(pos, sf::Vector2f{ 64, 64 });
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 5; i++)
 		{
 			items[i] = e->addEntity<Item>();
 			auto c = items[i]->createWidget< Didax::Canvas>();
 			c->setTexture(data["info"]["textures"][i]);
-			dragAndDrop->getWidget()->addChild(c);
 			dragAndDrop->getScript<DragAndDrop>()->addItem(items[i], i);
 		}
 	}
