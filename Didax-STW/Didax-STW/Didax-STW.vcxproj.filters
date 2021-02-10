@@ -60,7 +60,10 @@
     <ClCompile Include="DragAndDrop.cpp">
       <Filter>Pliki źródłowe\Interface</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
+    <ClCompile Include="FrameElement.cpp">
+      <Filter>Pliki źródłowe\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameEvent.cpp">
       <Filter>Pliki źródłowe\Interface</Filter>
     </ClCompile>
   </ItemGroup>
@@ -95,7 +98,10 @@
     <ClInclude Include="DragAndDrop.h">
       <Filter>Pliki nagłówkowe\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
+    <ClInclude Include="FrameEvent.h">
+      <Filter>Pliki nagłówkowe\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameElement.h">
       <Filter>Pliki nagłówkowe\Interface</Filter>
     </ClInclude>
   </ItemGroup>

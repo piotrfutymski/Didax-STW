@@ -22,6 +22,7 @@ void Didax::Entity::input(const sf::Event& evt)
 
 void Didax::Entity::kill()
 {
+	m_toKill = true;
 	m_script->kill();
 }
 

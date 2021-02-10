@@ -66,6 +66,9 @@
   "AKCdoskok": {
     "type": "texture",
     "path": "data/graphix/AKCdoskok.bmp"
+  },
+  "Exchangearrows": {
+    "type": "texture",
+    "path": "data/graphix/wymiana.bmp"
   }
-
 }

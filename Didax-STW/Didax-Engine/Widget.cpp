@@ -303,6 +303,21 @@ void Didax::Widget::removeChild(Widget* child)
 	m_children.erase(std::remove(m_children.begin(), m_children.end(), child), m_children.end());
 }
 
+Didax::Widget::CallbackType Didax::Widget::callbackFromName(const std::string& n)
+{
+	if (n == "onHoverIn")
+		return CallbackType::onHoverIn;
+	if (n == "onHoverOut")
+		return CallbackType::onHoverOut;
+	if (n == "onPress")
+		return CallbackType::onPress;
+	if (n == "onRelease")
+		return CallbackType::onRelease;
+	if (n == "onPressRight")
+		return CallbackType::onPressRight;
+	return CallbackType::onPress;
+}
+
 void Didax::Widget::setParent(Widget* parent)
 {
 	m_parent = parent;

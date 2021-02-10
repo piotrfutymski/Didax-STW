@@ -25,22 +25,10 @@ void RootFrame::onStart(Didax::Engine* e)
 
 void RootFrame::onUpdate(Didax::Engine* e)
 {
-	if (m_closing.size() > 0)
-	{
-		for (auto it = m_closing.begin(); it != m_closing.end();)
-		{
-			if (!(*it)->isMovingInTime())
-			{
-				(*it)->setVisible(false);
-				(*it)->setActive(false);
-				it = m_closing.erase(it);
-			}
-			else
-				it++;				
-		}
-	}
-	
+	updateCallbacks(e);
+	updateHiding();
 	_onUpdate(e);
+	m_callbacks.clear();
 }
 
 void RootFrame::onKill(Didax::Engine* e)
@@ -49,19 +37,26 @@ void RootFrame::onKill(Didax::Engine* e)
 	_onKill(e);
 }
 
+void RootFrame::addCallback(const FrameEvent& e)
+{
+	m_callbacks.push_back(e);
+}
+
+
 void RootFrame::initMyObjects(Didax::Engine* e, const std::string& name)
 {
 	auto& mData = e->getAssets()->getAsset<Didax::DataAsset>(name)->data;
-	if (mData.contains("hidden") && mData["hidden"])
+	if (mData.contains("hidden") && mData["hidden"] && name != m_name)
 	{
-		m_objects[name]->setVisible(false);
-		m_objects[name]->setActive(false);
+		m_objects[name]->getWidget()->setVisible(false);
+		m_objects[name]->getWidget()->setActive(false);
 	}
 	if (mData.contains("children"))
 	{
 		for (const std::string& cName : mData["children"])
 		{
-			m_objects[cName] = e->getEntity(cName)->getWidget();
+			m_objects[cName] = e->getEntity(cName);
+			m_objects[cName]->addScript<FrameElement>(this);
 			initMyObjects(e, cName);
 		}
 	}
@@ -69,86 +64,104 @@ void RootFrame::initMyObjects(Didax::Engine* e, const std::string& name)
 
 void RootFrame::killMyObjects(Didax::Engine* e, const std::string& name)
 {
-	auto& mData = e->getAssets()->getAsset<Didax::DataAsset>(name)->data;
-	if (mData.contains("children"))
-	{
-		for (const std::string& cName : mData["children"])
-		{		
-			killMyObjects(e, cName);
-			e->getEntity(cName)->kill();
-		}
-	}
+	for (auto& x : m_objects)
+		x.second->kill();
 }
 
 void RootFrame::addMyObjectEvents(Didax::Engine* e)
 {
-	for (auto& obj: m_objects)
+	for (auto& x : m_objects)
 	{
-		auto& objData = e->getAssets()->getAsset<Didax::DataAsset>(obj.first)->data;
-		if (objData.contains("onPress"))
+		auto& mData = e->getAssets()->getAsset<Didax::DataAsset>(x.first)->data;
+		if (mData.contains("events"))
 		{
-			if (objData["onPress"].contains("open"))
-				addEventOpen(obj.second, objData["onPress"]["open"], Didax::Widget::CallbackType::onPress,e);
-			if(objData["onPress"].contains("hide"))
-				addEventHide(obj.second, objData["onPress"]["hide"], Didax::Widget::CallbackType::onPress,e);
-			if (objData["onPress"].contains("exit") && objData["onPress"]["exit"])
-				addEventExit(obj.second, Didax::Widget::CallbackType::onPress);
-		}
-		if (objData.contains("onHoverIn"))
-		{
-			if (objData["onHoverIn"].contains("open"))
-				addEventOpen(obj.second, objData["onHoverIn"]["open"], Didax::Widget::CallbackType::onHoverIn,e);
-			if (objData["onHoverIn"].contains("hide"))
-				addEventHide(obj.second, objData["onHoverIn"]["hide"], Didax::Widget::CallbackType::onHoverIn,e);
-			if (objData["onHoverIn"].contains("exit") && objData["onHoverIn"]["exit"])
-				addEventExit(obj.second, Didax::Widget::CallbackType::onHoverIn);
-		}
-		if (objData.contains("onHoverOut"))
-		{
-			if (objData["onHoverOut"].contains("open"))
-				addEventOpen(obj.second, objData["onHoverOut"]["open"], Didax::Widget::CallbackType::onHoverOut,e);
-			if (objData["onHoverOut"].contains("hide"))
-				addEventHide(obj.second, objData["onHoverOut"]["hide"], Didax::Widget::CallbackType::onHoverOut,e);
-			if (objData["onHoverOut"].contains("exit") && objData["onHoverOut"]["exit"])
-				addEventExit(obj.second, Didax::Widget::CallbackType::onHoverOut);
+			auto scr = x.second->getScript<FrameElement>();
+			for (auto& [key, val] : mData["events"].items())
+				scr->addCallback(Didax::Widget::callbackFromName(key), FrameEvent(val));
 		}
 	}
 }
 
-void RootFrame::addEventOpen(Didax::Widget* widg, const std::string& toopen, Didax::Widget::CallbackType type, Didax::Engine* e)
+void RootFrame::updateCallbacks(Didax::Engine* e)
 {
-	auto toopenWidg = m_objects[toopen];
+	for (auto& evnt : m_callbacks)
+	{
+		if (evnt.name == "open")
+			eventOpen(evnt.value, e);
+		else if (evnt.name == "hide")
+			eventHide(evnt.value, e);
+		else if (evnt.name == "show")
+			eventShow(evnt.value, e);
+		else if (evnt.name == "close")
+			eventClose(evnt.value, e);
+		else if (evnt.name == "exit")
+			eventExit(e);
+		_onCallback(evnt, e);
+	}
+}
+
+void RootFrame::updateHiding()
+{
+	if (m_hiding.size() > 0)
+	{
+		for (auto it = m_hiding.begin(); it != m_hiding.end();)
+		{
+			if (!(*it)->getWidget()->isMovingInTime())
+			{
+				(*it)->getWidget()->setVisible(false);
+				(*it)->getWidget()->setActive(false);
+				it = m_hiding.erase(it);
+			}
+			else
+				it++;
+		}
+	}
+}
+
+void RootFrame::eventOpen(const std::string& toopen, Didax::Engine* e)
+{
+	auto toopenWidg = m_objects[toopen]->getWidget();
 	auto& toopenData = e->getAssets()->getAsset<Didax::DataAsset>(toopen)->data;
+	sf::Vector2f pos{ toopenData["rectangle"]["x"], toopenData["rectangle"]["y"] };
+	toopenWidg->setPosition(pos);
+	toopenWidg->setVisible(true);
+	toopenWidg->setActive(true);
+}
+
+void RootFrame::eventShow(const std::string& toshow, Didax::Engine* e)
+{
+	auto toopenWidg = m_objects[toshow]->getWidget();
+	auto& toopenData = e->getAssets()->getAsset<Didax::DataAsset>(toshow)->data;
 	sf::Vector2f pos{ toopenData["rectangle"]["x"], toopenData["rectangle"]["y"] };
 	sf::Vector2f siz{ toopenData["rectangle"]["width"], toopenData["rectangle"]["height"] };
 	sf::Vector2f startingPos{ pos.x, -siz.y };
-
-	widg->setWidgetEvent(type, [toopenWidg, pos, startingPos](Didax::Widget*) {
-		toopenWidg->setPosition(startingPos);
-		toopenWidg->setPositionInTime(pos, 0.25);
-		toopenWidg->setVisible(true);
-		toopenWidg->setActive(true);
-	});
+	toopenWidg->setPosition(startingPos);
+	toopenWidg->setVisible(true);
+	toopenWidg->setActive(true);
 }
 
-void RootFrame::addEventHide(Didax::Widget* widg, const std::string& toclose, Didax::Widget::CallbackType type, Didax::Engine* e)
+void RootFrame::eventClose(const std::string& toclose, Didax::Engine* e)
 {
-	auto tocloseWidg = m_objects[toclose];
+	auto tocloseWidg = m_objects[toclose]->getWidget();
 	auto& toopenData = e->getAssets()->getAsset<Didax::DataAsset>(toclose)->data;
 	sf::Vector2f pos{ toopenData["rectangle"]["x"], toopenData["rectangle"]["y"] };
 	sf::Vector2f endPos{ pos.x, 1080 };
-	auto clo = &this->m_closing;
-
-	widg->setWidgetEvent(type, [tocloseWidg, endPos, clo](Didax::Widget*) {
-		tocloseWidg->setPositionInTime(endPos, 0.25);
-		clo->push_back(tocloseWidg);
-	});
+	tocloseWidg->setPosition(endPos);
+	tocloseWidg->setVisible(false);
+	tocloseWidg->setActive(false);
 }
 
-
-void RootFrame::addEventExit(Didax::Widget* widg, Didax::Widget::CallbackType type)
+void RootFrame::eventHide(const std::string& toHide, Didax::Engine* e)
 {
-	widg->setWidgetEvent(type, [this](Didax::Widget*) {
-		this->getMe()->kill();
-	});
+	auto tocloseWidg = m_objects[toHide]->getWidget();
+	auto& toopenData = e->getAssets()->getAsset<Didax::DataAsset>(toHide)->data;
+	sf::Vector2f pos{ toopenData["rectangle"]["x"], toopenData["rectangle"]["y"] };
+	sf::Vector2f endPos{ pos.x, 1080 };
+	tocloseWidg->setPositionInTime(endPos, 0.25);
+	m_hiding.push_back(m_objects[toHide]);
+}
+
+void RootFrame::eventExit(Didax::Engine* e)
+{
+	m_me->kill();
 }

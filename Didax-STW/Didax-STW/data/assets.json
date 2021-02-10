@@ -20,8 +20,11 @@
   "textures": {
     "path": "data/assets/textures.json"
   },
-  "widgets": {
-    "path": "data/assets/widgets.json"
+  "widgetsMenu": {
+    "path": "data/assets/widgetsMenu.json"
+  },
+  "widgetsActivity": {
+    "path": "data/assets/widgetsActivity.json"
   }
 
 }

@@ -18,10 +18,10 @@ void DragAndDrop::removeItem(int pos)
 		return;
 	auto item = getItem(pos);
 	item->getWidget()->setWidgetEvent(Didax::Widget::CallbackType::onPress, [this, item](Didax::Widget* w) {
-		item->getScript<Item>()->onClick();
+		item->getScript<FrameElement>()->onClick();
 	});
 	item->getWidget()->setWidgetEvent(Didax::Widget::CallbackType::onRelease, [this, item](Didax::Widget* w) {
-		item->getScript<Item>()->onRelease();
+		item->getScript<FrameElement>()->onRelease();
 	});
 	m_items[pos] = nullptr;
 }
@@ -94,12 +94,12 @@ void DragAndDrop::addItem(Didax::Entity_ptr item, int pos)
 		m_items[pos] = item;
 		item->getWidget()->setWidgetEvent(Didax::Widget::CallbackType::onPress, [this, item](Didax::Widget* w) {
 			onClick(w, item);
-			item->getScript<Item>()->onClick();
+			item->getScript<FrameElement>()->onClick();
 
 		});
 		item->getWidget()->setWidgetEvent(Didax::Widget::CallbackType::onRelease, [this, item](Didax::Widget* w) {
 			onRelease(w, item);
-			item->getScript<Item>()->onRelease();
+			item->getScript<FrameElement>()->onRelease();
 		});
 		m_me->getWidget()->addChild(item->getWidget());
 		item->getWidget()->setPosition(m_itemPositions[pos]);
@@ -114,10 +114,10 @@ void DragAndDrop::removeItem(Didax::Entity_ptr item)
 	if (it == m_items.end())
 		return;
 	item->getWidget()->setWidgetEvent(Didax::Widget::CallbackType::onPress, [this, item](Didax::Widget* w) {
-		item->getScript<Item>()->onClick();
+		item->getScript<FrameElement>()->onClick();
 	});
 	item->getWidget()->setWidgetEvent(Didax::Widget::CallbackType::onRelease, [this, item](Didax::Widget* w) {
-		item->getScript<Item>()->onRelease();
+		item->getScript<FrameElement>()->onRelease();
 	});
 	m_items[std::distance(m_items.begin(), it)] = nullptr;
 }

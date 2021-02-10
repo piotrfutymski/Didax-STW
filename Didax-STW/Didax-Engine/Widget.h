@@ -94,6 +94,8 @@ namespace Didax
 		bool addChild(Widget* child);
 		void removeChild(Widget* child);
 
+		static CallbackType callbackFromName(const std::string& n);
+
 	protected:
 
 		virtual void _update(float deltaT) = 0;

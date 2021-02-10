@@ -1,0 +1,150 @@
+{
+  "activityWIDG": {
+    "type": "data",
+    "widgetType": "canvas",
+    "opacity": 100,
+    "interable": false,
+    "background": "MainMenuPaper",
+    "rectangle": {
+      "x": 100,
+      "y": 80,
+      "width": 1720,
+      "height": 920
+    },
+    "children": [ "SituationWIDG", "ActionPanelWIDG", "TurnPanelWIDG", "StatisticPanelWIDG", "EquipmentPanelWIDG", "HourGlassButtonWIDG" ]
+  },
+  "SituationWIDG": {
+    "type": "data",
+    "widgetType": "canvas",
+    "opacity": 100,
+    "background": "ButtonLeather",
+    "interable": false,
+    "rectangle": {
+      "x": 50,
+      "y": 20,
+      "width": 400,
+      "height": 300
+    },
+    "children": [ "SituationGraphicWIDG", "SituationTextWIDG" ]
+  },
+  "SituationGraphicWIDG": {
+    "type": "data",
+    "widgetType": "canvas",
+    "opacity": 100,
+    "background": "warrior",
+    "interable": false,
+    "rectangle": {
+      "x": 0,
+      "y": 0,
+      "width": 150,
+      "height": 150
+    }
+  },
+  "SituationTextWIDG": {
+    "type": "data",
+    "widgetType": "textArea",
+    "opacity": 100,
+    "text": "1 Warrior is attacking you right now. He's armed with a two-handed axe, and looks like a warrior born, so if your defence is weak you should be very careful while fighting him",
+    "interable": false,
+    "fontsize": 14,
+    "fontcolor": [ 255, 255, 255 ],
+    "font": "arial",
+    "margin": [ 20, 20 ],
+    "textalign": "left",
+    "rectangle": {
+      "x": 0,
+      "y": 150,
+      "width": 400,
+      "height": 150
+    }
+  },
+  "ActionPanelWIDG": {
+    "type": "data",
+    "widgetType": "canvas",
+    "opacity": 100,
+    "background": "ButtonLeather",
+    "interable": false,
+    "rectangle": {
+      "x": 350,
+      "y": 800,
+      "width": 800,
+      "height": 100
+    },
+    "info": {
+      "DragandDropPositionsX": [ 10, 110, 210, 310, 410, 510 ],
+      "DragandDropPositionsY": 10
+    },
+    "children": [ "ExchangeSquareWIDG" ]
+  },
+  "ExchangeSquareWIDG": {
+    "type": "data",
+    "widgetType": "canvas",
+    "opacity": 100,
+    "background": "Exchangearrows",
+    "interable": false,
+    "rectangle": {
+      "x": 710,
+      "y": 10,
+      "width": 80,
+      "height": 80
+    }
+  },
+  "TurnPanelWIDG": {
+    "type": "data",
+    "widgetType": "canvas",
+    "opacity": 100,
+    "background": "ButtonLeather",
+    "interable": false,
+    "rectangle": {
+      "x": 550,
+      "y": 500,
+      "width": 400,
+      "height": 150
+    },
+    "info": {
+      "DragandDropPositionsX": [ 10, 110, 210, 310 ],
+      "DragandDropPositionsY": 10
+    },
+    "children": []
+  },
+  "StatisticPanelWIDG": {
+    "type": "data",
+    "widgetType": "canvas",
+    "opacity": 100,
+    "background": "ButtonLeather",
+    "interable": false,
+    "rectangle": {
+      "x": 1300,
+      "y": 20,
+      "width": 400,
+      "height": 250
+    },
+    "children": []
+  },
+  "EquipmentPanelWIDG": {
+    "type": "data",
+    "widgetType": "canvas",
+    "opacity": 100,
+    "background": "ButtonLeather",
+    "interable": false,
+    "rectangle": {
+      "x": 1300,
+      "y": 400,
+      "width": 400,
+      "height": 80
+    },
+    "children": []
+  },
+  "HourGlassButtonWIDG": {
+    "type": "data",
+    "widgetType": "button",
+    "opacity": 100,
+    "background": "archer",
+    "rectangle": {
+      "x": 980,
+      "y": 530,
+      "width": 80,
+      "height": 80
+    }
+  }
+}

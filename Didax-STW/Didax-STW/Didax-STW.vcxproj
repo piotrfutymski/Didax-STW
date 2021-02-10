@@ -154,10 +154,11 @@
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="DragAndDrop.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="FrameElement.cpp" />
+    <ClCompile Include="FrameEvent.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="Hero.cpp" />
-    <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RootFrame.cpp" />
     <ClCompile Include="StatusValues.cpp" />
@@ -173,10 +174,11 @@
     <ClInclude Include="Deck.h" />
     <ClInclude Include="DragAndDrop.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="FrameElement.h" />
+    <ClInclude Include="FrameEvent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameSettings.h" />
     <ClInclude Include="Hero.h" />
-    <ClInclude Include="Item.h" />
     <ClInclude Include="RootFrame.h" />
     <ClInclude Include="StatusValues.h" />
   </ItemGroup>
