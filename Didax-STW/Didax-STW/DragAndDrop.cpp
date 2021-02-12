@@ -26,6 +26,17 @@ void DragAndDrop::removeItem(int pos)
 	m_items[pos] = nullptr;
 }
 
+void DragAndDrop::clear(Didax::Engine* e)
+{
+	for (int i = 0; i < m_items.size(); i++)
+	{
+		if (m_items[i] == nullptr)
+			continue;
+		e->removeEntity(m_items[i]->getName());
+		removeItem(i);
+	}
+}
+
 Didax::Entity_ptr DragAndDrop::getItem(int pos)
 {
 	if (pos >= m_items.size())
@@ -128,7 +139,7 @@ void DragAndDrop::onClick(Didax::Widget* w, Didax::Entity_ptr i)
 	m_startingMousePos = Didax::Input::getMousePosition();
 	auto it = std::find(m_items.begin(), m_items.end(), i);
 	m_dragged = (int)(std::distance(m_items.begin(), it));
-	auto itemWidg = i->getWidget<Didax::Canvas>();
+	auto itemWidg = i->getWidget<Didax::Button>();
 	i->setPriority(i->getPriority() + 2);
 	m_shadow = m_eng->addEntity();
 	m_shadow->setPriority(i->getPriority() - 2);

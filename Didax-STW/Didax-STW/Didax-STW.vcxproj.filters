@@ -66,6 +66,12 @@
     <ClCompile Include="FrameEvent.cpp">
       <Filter>Pliki źródłowe\Interface</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenuFrame.cpp">
+      <Filter>Pliki źródłowe\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="ActivityFrame.cpp">
+      <Filter>Pliki źródłowe\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RootFrame.h">
@@ -102,6 +108,12 @@
       <Filter>Pliki nagłówkowe\Interface</Filter>
     </ClInclude>
     <ClInclude Include="FrameElement.h">
+      <Filter>Pliki nagłówkowe\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuFrame.h">
+      <Filter>Pliki nagłówkowe\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ActivityFrame.h">
       <Filter>Pliki nagłówkowe\Interface</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,9 +1,8 @@
 {
   "HERO": {
     "type": "data",
-    "initPB": 30,
-    "initFightDeck": [],
-    "initExplorationDeck": [],
-    "initTalkDeck": []
+    "startingPB": 30,
+    "startActions": [ "parryAKC", "punchAKC", "blockAKC", "slashAKC", "firePostureAKC", "groundPostureAKC", "chargeAKC", "shieldStrikeAKC", "dodgeAKC", "bloodyBlowAKC", "windPostureAKC", "waterPostureAKC", "evenBreathingAKC" ],
+    "startingFightDeck": [ "parryAKC", "punchAKC", "blockAKC", "slashAKC", "firePostureAKC", "groundPostureAKC", "chargeAKC", "shieldStrikeAKC", "dodgeAKC", "bloodyBlowAKC", "windPostureAKC", "waterPostureAKC", "evenBreathingAKC" ]
   }
 }

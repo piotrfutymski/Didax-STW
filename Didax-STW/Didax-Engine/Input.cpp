@@ -7,7 +7,8 @@ void Didax::Input::setWindow(sf::Window* w)
 
 sf::Vector2i Didax::Input::getMousePosition()
 {
-	return sf::Mouse::getPosition(*m_window);
+	return m_mousePos;
+	// TO DO!!!
 }
 
 sf::Vector2i Didax::Input::getRezolution()
@@ -32,6 +33,11 @@ void Didax::Input::moveCursor()
 	m_cursor.setPosition(m.x, m.y);
 }
 
+void Didax::Input::update()
+{
+	m_mousePos = sf::Mouse::getPosition(*m_window);
+}
+
 sf::Sprite* Didax::Input::getCursor()
 {
 	return &m_cursor;
@@ -42,3 +48,5 @@ sf::Window* Didax::Input::m_window = nullptr;
 sf::Sprite  Didax::Input::m_cursor{};
 
 sf::Texture* Didax::Input::m_textures[3]{nullptr, nullptr, nullptr};
+
+sf::Vector2i Didax::Input::m_mousePos{};

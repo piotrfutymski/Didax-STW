@@ -269,6 +269,11 @@ Activity::ActivityType Activity::getType() const
 	return m_type;
 }
 
+Activity::State Activity::getState() const
+{
+	return m_state;
+}
+
 void Activity::initTypeFromString(const std::string& t)
 {
 	if (t == "fight")

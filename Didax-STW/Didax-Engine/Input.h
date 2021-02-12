@@ -25,6 +25,8 @@ namespace Didax
 
 		static void moveCursor();
 
+		static void update();
+
 		static sf::Sprite* getCursor();
 
 	private:
@@ -34,6 +36,8 @@ namespace Didax
 		static sf::Sprite m_cursor;
 
 		static sf::Texture*  m_textures[3];
+
+		static sf::Vector2i m_mousePos;
 
 
 

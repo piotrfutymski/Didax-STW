@@ -95,6 +95,8 @@ public:
 
 	ActivityType getType()const;
 
+	State getState()const;
+
 	int getPBCostOfBoard()const;
 
 private:

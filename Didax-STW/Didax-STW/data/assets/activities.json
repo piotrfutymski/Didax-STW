@@ -1,8 +1,8 @@
 {
-  "testACT": {
+  "testACTV": {
     "type": "data",
     "activityType": "fight",
-    "enemy": "",
+    "enemy": "wolfENE",
     "descWidg": ""
   }
 }

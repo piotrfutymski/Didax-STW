@@ -238,6 +238,7 @@ void Didax::Engine::update()
 		else
 			++it;
 	}
+	Input::update();
 }
 
 void Didax::Engine::render()

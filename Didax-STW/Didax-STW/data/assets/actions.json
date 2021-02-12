@@ -1,194 +1,107 @@
 {
-  "quickThrustACT": {
+  "parryAKC": {
     "type": "data",
-    "description": "",
     "activity": "fight",
     "subtype": "offensive",
-    "rarity": "normal",
-    "basic": [ 11, 2, 2 ],
-    "conditional": [ 3, 3, 3 ],
-    "onCond": {
-      "0": {
-        "conditions": {
-          "nextTo": "offensive"
-        },
-        "result": {
-          "addConditional": true
-        }
-      }
-    }
+    "minValues": [ 11, 2, 2 ],
+    "maxValues": [ 13, 3, 3 ],
+    "texture": "AKCparry"
   },
-  "bloodyBlowACT": {
+  "punchAKC": {
     "type": "data",
-    "description": "",
     "activity": "fight",
     "subtype": "offensive",
-    "rarity": "normal",
-    "basic": [ 15, 0, 0 ],
-    "conditional": [ 11, 0, 0 ],
-    "onCond": {
-      "0": {
-        "conditions": {
-          "nextTo": "offensive"
-        },
-        "result": {
-          "addConditional": true
-        }
-      }
-    }
+    "minValues": [ 11, 2, 2 ],
+    "maxValues": [ 13, 3, 3 ],
+    "texture": "AKCpunch"
   },
-  "straightCutACT": {
+  "blockAKC": {
     "type": "data",
-    "description": "",
     "activity": "fight",
     "subtype": "offensive",
-    "rarity": "normal",
-    "basic": [ 10, 0, 0 ],
-    "conditional": [ 0, 0, 0 ],
-    "onBonus": ["offBonus0", 50, 13]
+    "minValues": [ 11, 2, 2 ],
+    "maxValues": [ 13, 3, 3 ],
+    "texture": "AKCblock"
   },
-  "parryACT": {
+  "slashAKC": {
     "type": "data",
-    "description": "",
     "activity": "fight",
-    "subtype": "deffensive",
-    "rarity": "normal",
-    "basic": [ 2, 12, 0 ],
-    "conditional": [ 6, 6, 0 ],
-    "onCond": {
-      "0": {
-        "conditions": {
-          "count": [ "deffensive", 3 ]
-        },
-        "result": {
-          "addConditional": true
-        }
-      }
-    }
+    "subtype": "offensive",
+    "minValues": [ 11, 2, 2 ],
+    "maxValues": [ 13, 3, 3 ],
+    "texture": "AKCslash"
   },
-  "dodgeACT": {
+  "firePostureAKC": {
     "type": "data",
-    "description": "",
     "activity": "fight",
-    "subtype": "deffensive",
-    "rarity": "normal",
-    "basic": [ 0, 12, 2 ],
-    "conditional": [ 0, 6, 6 ],
-    "onCond": {
-      "0": {
-        "conditions": {
-          "count": [ "deffensive", 3 ]
-        },
-        "result": {
-          "addConditional": true
-        }
-      }
-    }
+    "subtype": "offensive",
+    "minValues": [ 11, 2, 2 ],
+    "maxValues": [ 13, 3, 3 ],
+    "texture": "AKCfirePosture"
   },
-  "takingTheBlowACT": {
+  "groundPostureAKC": {
     "type": "data",
-    "description": "",
     "activity": "fight",
-    "subtype": "deffensive",
-    "rarity": "normal",
-    "basic": [ 1, 10, 1 ],
-    "conditional": [ 0, 0, 0 ],
-    "onBonus": [ "deffBonus0", 20]
+    "subtype": "offensive",
+    "minValues": [ 11, 2, 2 ],
+    "maxValues": [ 13, 3, 3 ],
+    "texture": "AKCgroundPosture"
   },
-  "earthPostureACT": {
+  "chargeAKC": {
     "type": "data",
-    "description": "",
     "activity": "fight",
-    "subtype": "posture",
-    "rarity": "normal",
-    "basic": [ 0, 2, 14 ],
-    "conditional": [ 0, 4, 4 ],
-    "onCond": {
-      "0": {
-        "conditions": {
-          "nextTo": "deffensive"
-        },
-        "result": {
-          "addConditional": true
-        }
-      }
-    }
+    "subtype": "offensive",
+    "minValues": [ 11, 2, 2 ],
+    "maxValues": [ 13, 3, 3 ],
+    "texture": "AKCcharge"
   },
-  "firePostureACT": {
+  "shieldStrikeAKC": {
     "type": "data",
-    "description": "",
     "activity": "fight",
-    "subtype": "posture",
-    "rarity": "normal",
-    "basic": [ 2, 0, 14 ],
-    "conditional": [ 4, 0, 4 ],
-    "onCond": {
-      "0": {
-        "conditions": {
-          "nextTo": "offensive"
-        },
-        "result": {
-          "addConditional": true
-        }
-      }
-    }
+    "subtype": "offensive",
+    "minValues": [ 11, 2, 2 ],
+    "maxValues": [ 13, 3, 3 ],
+    "texture": "AKCshieldStrike"
   },
-  "backToPositionACT": {
+  "dodgeAKC": {
     "type": "data",
-    "description": "",
     "activity": "fight",
-    "subtype": "posture",
-    "rarity": "normal",
-    "basic": [ 0, 0, 4 ],
-    "conditional": [ 0, 0, 0 ],
-    "onBonus": [ "posBonus0", 18 ]
-
+    "subtype": "offensive",
+    "minValues": [ 11, 2, 2 ],
+    "maxValues": [ 13, 3, 3 ],
+    "texture": "AKCdodge"
   },
-  "tauntACT": {
+  "bloodyBlowAKC": {
     "type": "data",
-    "description": "",
     "activity": "fight",
-    "subtype": "general",
-    "rarity": "normal",
-    "basic": [ 2, 2, 2 ],
-    "conditional": [ 0, 0, 0 ],
-    "onCond": {
-      "0": {
-        "conditions": {
-          "position": 1
-        },
-        "result": {
-          "add": [ 9, 0, 9 ]
-        }
-      },
-      "1": {
-        "conditions": {
-          "position": 4
-        },
-        "result": {
-          "add": [ 0, 9, 9 ]
-        }
-      }
-    }
+    "subtype": "offensive",
+    "minValues": [ 11, 2, 2 ],
+    "maxValues": [ 13, 3, 3 ],
+    "texture": "AKCbloodyBlow"
   },
-  "takeABreathACT": {
+  "windPostureAKC": {
     "type": "data",
-    "description": "",
     "activity": "fight",
-    "subtype": "general",
-    "rarity": "silver",
-    "basic": [ 6, 6, 6 ],
-    "conditional": [ 7, 7, 7 ],
-    "onCond": {
-      "0": {
-        "conditions": {
-          "count": [ "deffensive", 1, "offensive", 1, "posture", 1 ]
-        },
-        "result": {
-          "addConditional": true
-        }
-      }
-    },
-    "PB": 2
+    "subtype": "offensive",
+    "minValues": [ 11, 2, 2 ],
+    "maxValues": [ 13, 3, 3 ],
+    "texture": "AKCwindPosture"
+  },
+  "waterPostureAKC": {
+    "type": "data",
+    "activity": "fight",
+    "subtype": "offensive",
+    "minValues": [ 11, 2, 2 ],
+    "maxValues": [ 13, 3, 3 ],
+    "texture": "AKCwaterPosture"
+  },
+  "evenBreathingAKC": {
+    "type": "data",
+    "activity": "fight",
+    "subtype": "offensive",
+    "minValues": [ 11, 2, 2 ],
+    "maxValues": [ 13, 3, 3 ],
+    "texture": "AKCevenBreathing"
   }
+
 }

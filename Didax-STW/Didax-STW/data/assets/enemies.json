@@ -1,3 +1,8 @@
 {
-
+  "wolfENE": {
+    "type": "data",
+    "disabling": false,
+    "minValues": [ 15, 25, 20 ],
+    "maxValues": [ 25, 30, 25 ]
+  }
 }

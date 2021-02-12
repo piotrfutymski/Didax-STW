@@ -14,7 +14,13 @@ void Didax::Button::setTexture(const std::string& name)
 	}
 	m_sprite.setTexture(t->texture);
 	m_textureSet = true;
+	m_texture = name;
 	updateSize();
+}
+
+std::string Didax::Button::getTexture()
+{
+	return m_texture;
 }
 
 void Didax::Button::setHoverMask(const sf::Color& c)

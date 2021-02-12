@@ -2,9 +2,9 @@
 
 Enemy::Enemy(const nlohmann::json& enemyData, const std::string& nam):m_data{enemyData}, m_name{nam}
 {
-	m_disabling = m_data["disabling"];
-	m_minValues = m_data["minValues"];
-	m_maxValues = m_data["maxValues"];
+	m_disabling = enemyData["disabling"];
+	m_minValues = enemyData["minValues"];
+	m_maxValues = enemyData["maxValues"];
 }
 
 void Enemy::play(std::vector<std::string>& board, const StatusValues& status) const

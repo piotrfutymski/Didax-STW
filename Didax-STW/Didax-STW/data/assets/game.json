@@ -1,8 +1,8 @@
 {
   "GAME": {
     "type":  "data",
-    "actions": [],
-    "enemies": [],
+    "actions": [ "parryAKC", "punchAKC", "blockAKC", "slashAKC", "firePostureAKC", "groundPostureAKC", "chargeAKC", "shieldStrikeAKC", "dodgeAKC", "bloodyBlowAKC", "windPostureAKC", "waterPostureAKC", "evenBreathingAKC" ],
+    "enemies": ["wolfENE"],
     "scenarios": [],
     "items": []
   }

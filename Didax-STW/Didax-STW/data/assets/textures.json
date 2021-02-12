@@ -7,10 +7,6 @@
     "type": "texture",
     "path": "data/graphix/lucznik.bmp"
   },
-  "test1": {
-    "type": "texture",
-    "path": "data/graphix/test1.bmp"
-  },
   "MainMenuBackground": {
     "type": "texture",
     "path": "data/graphix/MainMenuBackground.bmp"
@@ -39,36 +35,60 @@
     "type": "texture",
     "path": "data/graphix/loadingCUR.bmp"
   },
-  "blokAKC": {
-    "type": "texture",
-    "path": "data/graphix/blokAKC.bmp"
-  },
-  "ciosAKC": {
-    "type": "texture",
-    "path": "data/graphix/ciosAKC.bmp"
-  },
-  "doskokAKC": {
-    "type": "texture",
-    "path": "data/graphix/doskokAKC.bmp"
-  },
-  "krwawyCiosAKC": {
-    "type": "texture",
-    "path": "data/graphix/krwawyCiosAKC.bmp"
-  },
-  "parowanieAKC": {
-    "type": "texture",
-    "path": "data/graphix/parowanieAKC.bmp"
-  },
-  "unikAKC": {
-    "type": "texture",
-    "path": "data/graphix/unikAKC.bmp"
-  },
-  "AKCdoskok": {
-    "type": "texture",
-    "path": "data/graphix/AKCdoskok.bmp"
-  },
   "Exchangearrows": {
     "type": "texture",
     "path": "data/graphix/wymiana.bmp"
+  },
+  "AKCparry": {
+    "type": "texture",
+    "path": "data/graphix/AKCparry.bmp"
+  },
+  "AKCpunch": {
+    "type": "texture",
+    "path": "data/graphix/AKCpunch.bmp"
+  },
+  "AKCblock": {
+    "type": "texture",
+    "path": "data/graphix/AKCblock.bmp"
+  },
+  "AKCslash": {
+    "type": "texture",
+    "path": "data/graphix/AKCslash.bmp"
+  },
+  "AKCfirePosture": {
+    "type": "texture",
+    "path": "data/graphix/AKCfirePosture.bmp"
+  },
+  "AKCgroundPosture": {
+    "type": "texture",
+    "path": "data/graphix/AKCgroundPosture.bmp"
+  },
+  "AKCcharge": {
+    "type": "texture",
+    "path": "data/graphix/AKCcharge.bmp"
+  },
+  "AKCshieldStrike": {
+    "type": "texture",
+    "path": "data/graphix/AKCshieldStrike.bmp"
+  },
+  "AKCdodge": {
+    "type": "texture",
+    "path": "data/graphix/AKCdodge.bmp"
+  },
+  "AKCbloodyBlow": {
+    "type": "texture",
+    "path": "data/graphix/AKCbloodyBlow.bmp"
+  },
+  "AKCwindPosture": {
+    "type": "texture",
+    "path": "data/graphix/AKCbloodyBlow.bmp"
+  },
+  "AKCwaterPosture": {
+    "type": "texture",
+    "path": "data/graphix/AKCbloodyBlow.bmp"
+  },
+  "AKCevenBreathing": {
+    "type": "texture",
+    "path": "data/graphix/AKCbloodyBlow.bmp"
   }
 }

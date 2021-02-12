@@ -15,6 +15,8 @@ void FrameElement::setMe(Didax::Entity_ptr m)
 {
 	m_me = m;
 	auto w = m_me->getWidget();
+	if (w == nullptr)
+		w = m_me->createWidget < Didax::Button >();
 	w->setWidgetEvent(Didax::Widget::CallbackType::onHoverIn, [this](Didax::Widget* w) {
 		this->onHoverIn();
 	});

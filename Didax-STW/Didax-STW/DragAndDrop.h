@@ -18,6 +18,8 @@ public:
 
 	void removeItem(int pos);
 
+	void clear(Didax::Engine* e);
+
 	Didax::Entity_ptr getItem(int pos);
 
 	Didax::Entity_ptr draggedItem();

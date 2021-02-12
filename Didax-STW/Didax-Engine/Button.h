@@ -15,6 +15,7 @@ namespace Didax
 	public:
 
 		void setTexture(const std::string& name);
+		std::string getTexture();
 
 		//properties
 
@@ -34,6 +35,7 @@ namespace Didax
 		sf::Color m_clickedColorMask{255, 255, 255, 255 };
 
 		bool m_textureSet{ false };
+		std::string m_texture = "";
 
 	private:
 		// Inherited via Widget
