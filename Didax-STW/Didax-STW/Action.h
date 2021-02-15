@@ -46,9 +46,8 @@ private:
 	Rarity m_rarity{Rarity::Normal};
 	int m_PBcost{ 0 };
 
-	StatusValues m_minValues{0,0,0};
-	StatusValues m_maxValues{0,0,0};
-	std::vector<std::pair<StatusValues, StatusValues>> m_conditional;
+	StatusValues m_basicValues{0,0,0};
+	std::vector<StatusValues> m_conditional;
 
 private:
 

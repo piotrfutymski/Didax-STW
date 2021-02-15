@@ -11,7 +11,7 @@
       "width": 1720,
       "height": 920
     },
-    "children": [ "SituationWIDG", "ActionPanelWIDG", "TurnPanelWIDG", "StatisticPanelWIDG", "EquipmentPanelWIDG", "HourGlassButtonWIDG" ]
+    "children": [ "SituationWIDG", "ActionPanelWIDG", "TurnPanelWIDG", "StatisticPanelWIDG", "EquipmentPanelWIDG", "HourGlassButtonWIDG", "activityInfoWIDG" ]
   },
   "SituationWIDG": {
     "type": "data",
@@ -145,6 +145,29 @@
       "y": 530,
       "width": 80,
       "height": 80
+    }
+  },
+  "activityInfoWIDG": {
+    "type": "data",
+    "widgetType": "textArea",
+    "opacity": 60,
+    "backgroundColor": [ 100, 100, 100 ],
+    "text": "Here will be info",
+    "interable": false,
+    "fontsize": 14,
+    "fontcolor": [ 255, 255, 255 ],
+    "font": "arial",
+    "margin": [ 10, 10 ],
+    "textalign": "left",
+    "rectangle": {
+      "x": 0,
+      "y": 0,
+      "width": 160,
+      "height": 120
+    },
+    "hidden": true,
+    "info": {
+      "spacing": 20
     }
   }
 }

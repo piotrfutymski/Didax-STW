@@ -1,6 +1,7 @@
 #pragma once
 #include "RootFrame.h"
 #include "DragAndDrop.h"
+#include "ActionElement.h"
 #include "Game.h"
 class ActivityFrame :
 	public RootFrame
@@ -22,5 +23,8 @@ private:
 
 	void beginTurn(Didax::Engine* eng);
 	void createDragAndDrop(Didax::Engine* e);
+
+	void showInfo(Didax::Entity_ptr item, Didax::Engine* e);
+	void hideInfo(Didax::Entity_ptr item, Didax::Engine* e);
 };
 

@@ -8,6 +8,8 @@ public:
 
 	FrameEvent();
 
+	FrameEvent(const std::string&, const std::string &);
+
 	FrameEvent(const nlohmann::json& jsn);
 
 	std::string name;

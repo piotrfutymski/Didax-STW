@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="ActionElement.cpp" />
     <ClCompile Include="Activity.cpp" />
     <ClCompile Include="ActivityFrame.cpp" />
     <ClCompile Include="Deck.cpp" />
@@ -172,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="ActionElement.h" />
     <ClInclude Include="Activity.h" />
     <ClInclude Include="ActivityFrame.h" />
     <ClInclude Include="Deck.h" />

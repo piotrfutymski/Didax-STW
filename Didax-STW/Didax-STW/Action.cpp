@@ -3,15 +3,14 @@
 
 void Action::loadFromJson(const nlohmann::json& actionData)
 {
-	if (!actionData.contains("activity") || !actionData.contains("subtype") || !actionData.contains("minValues") || !actionData.contains("maxValues"))
+	if (!actionData.contains("activity") || !actionData.contains("subtype") || !actionData.contains("basicValues"))
 	{
 		Didax::Logger::log("Unable to create action with name " + std::string{ m_name.begin(), m_name.end() }, Didax::Logger::Level::Warn);
 		return;
 	}
 	m_activity = actionData["activity"];
 	m_subtype = actionData["subtype"];
-	m_minValues = actionData["minValues"];
-	m_maxValues = actionData["maxValues"];
+	m_basicValues = actionData["basicValues"];
 	
 	if (actionData.contains("rarity"))
 		setRarity(actionData["rarity"]);
@@ -32,7 +31,7 @@ void Action::setRarity(const std::string& rar)
 void Action::loadConditional(const nlohmann::json& conditional)
 {
 	for (auto& x : conditional)
-		m_conditional.push_back({ StatusValues(x["minValues"]), StatusValues(x["maxValues"]) });
+		m_conditional.push_back(StatusValues(x["values"]));
 }
 
 StatusValues Action::upgradeValue(const std::vector<std::string>& board, int pos)
@@ -73,14 +72,14 @@ StatusValues Action::nextToUpgrade(const nlohmann::json& info, const std::vector
 	}
 	if (!adder)
 		return {0,0,0};
-	return randValue(m_conditional[info["reward"]].first, m_conditional[info["reward"]].second);
+	return m_conditional[info["reward"]];
 }
 
 StatusValues Action::onPositionUpgrade(const nlohmann::json& info, const std::vector<std::string>& board, int pos)
 {
 	if(!pos == info["position"])
 		return { 0,0,0 };
-	return randValue(m_conditional[info["reward"]].first, m_conditional[info["reward"]].second);
+	return m_conditional[info["reward"]];
 }
 
 StatusValues Action::countUpgrade(const nlohmann::json& info, const std::vector<std::string>& board, int pos)
@@ -96,7 +95,7 @@ StatusValues Action::countUpgrade(const nlohmann::json& info, const std::vector<
 	}
 	if (!adder)
 		return { 0,0,0 };
-	return randValue(m_conditional[info["reward"]].first, m_conditional[info["reward"]].second);
+	return m_conditional[info["reward"]];
 }
 
 bool Action::conditionNextToType(const std::string& type, int n, const std::vector<std::string>& board, int pos)
@@ -186,7 +185,7 @@ Action::Action(const nlohmann::json& data, const std::string& nam, Game* g) :m_d
 
 StatusValues Action::getUpgrade(const std::vector<std::string>& board, int pos)
 {
-	return randValue(m_minValues, m_maxValues) + upgradeValue(board, pos);
+	return m_basicValues + upgradeValue(board, pos);
 }
 
 StatusValues Action::getBonus(const std::vector<std::string>& board, int pos, const StatusValues& actual, const StatusValues& gained)

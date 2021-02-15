@@ -181,18 +181,17 @@ void DragAndDrop::onRelease(Didax::Widget* w, Didax::Entity_ptr i)
 int DragAndDrop::findDraggedReplace()
 {
 	auto mousePos = Didax::Input::getMousePosition();
-	auto abs = m_me->getWidget()->getAbsolutePosition();
+	auto abss = m_me->getWidget()->getAbsolutePosition();
 	for (int i =0; i < m_itemPositions.size(); i++)
 	{
 		if (i == m_dragged)
 			continue;
-		else if (m_items[i] == nullptr)
-		{
-			if (mousePos.x > m_itemPositions[i].x + abs.x && mousePos.y > m_itemPositions[i].y + abs.y &&
-				mousePos.x <= m_itemPositions[i].x + m_itemSize.x + abs.x && mousePos.y <= m_itemPositions[i].y + m_itemSize.y + abs.y)
-				return i;
-		}
-		else if (m_items[i]->getWidget()->isHovered())
+	
+		if (mousePos.x > m_itemPositions[i].x + abss.x && mousePos.y > m_itemPositions[i].y + abss.y &&
+			mousePos.x <= m_itemPositions[i].x + m_itemSize.x + abss.x && mousePos.y <= m_itemPositions[i].y + m_itemSize.y + abss.y)
+			return i;
+		auto pp = m_items[m_dragged]->getWidget()->getPosition();
+		if (abs(pp.x - m_itemPositions[i].x) < m_itemSize.x / 2 && abs(pp.y - m_itemPositions[i].y) < m_itemSize.y / 2)
 			return i;
 	}
 	return -1;

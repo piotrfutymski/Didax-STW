@@ -3,104 +3,91 @@
     "type": "data",
     "activity": "fight",
     "subtype": "offensive",
-    "minValues": [ 11, 2, 2 ],
-    "maxValues": [ 13, 3, 3 ],
+    "basicValues": [ 11, 2, 2 ],
     "texture": "AKCparry"
   },
   "punchAKC": {
     "type": "data",
     "activity": "fight",
     "subtype": "offensive",
-    "minValues": [ 11, 2, 2 ],
-    "maxValues": [ 13, 3, 3 ],
+    "basicValues": [ 11, 2, 2 ],
     "texture": "AKCpunch"
   },
   "blockAKC": {
     "type": "data",
     "activity": "fight",
     "subtype": "offensive",
-    "minValues": [ 11, 2, 2 ],
-    "maxValues": [ 13, 3, 3 ],
+    "basicValues": [ 11, 2, 2 ],
     "texture": "AKCblock"
   },
   "slashAKC": {
     "type": "data",
     "activity": "fight",
     "subtype": "offensive",
-    "minValues": [ 11, 2, 2 ],
-    "maxValues": [ 13, 3, 3 ],
+    "basicValues": [ 11, 2, 2 ],
     "texture": "AKCslash"
   },
   "firePostureAKC": {
     "type": "data",
     "activity": "fight",
     "subtype": "offensive",
-    "minValues": [ 11, 2, 2 ],
-    "maxValues": [ 13, 3, 3 ],
+    "basicValues": [ 11, 2, 2 ],
     "texture": "AKCfirePosture"
   },
   "groundPostureAKC": {
     "type": "data",
     "activity": "fight",
     "subtype": "offensive",
-    "minValues": [ 11, 2, 2 ],
-    "maxValues": [ 13, 3, 3 ],
+    "basicValues": [ 11, 2, 2 ],
     "texture": "AKCgroundPosture"
   },
   "chargeAKC": {
     "type": "data",
     "activity": "fight",
     "subtype": "offensive",
-    "minValues": [ 11, 2, 2 ],
-    "maxValues": [ 13, 3, 3 ],
+    "basicValues": [ 11, 2, 2 ],
     "texture": "AKCcharge"
   },
   "shieldStrikeAKC": {
     "type": "data",
     "activity": "fight",
     "subtype": "offensive",
-    "minValues": [ 11, 2, 2 ],
-    "maxValues": [ 13, 3, 3 ],
+    "basicValues": [ 11, 2, 2 ],
     "texture": "AKCshieldStrike"
   },
   "dodgeAKC": {
     "type": "data",
     "activity": "fight",
     "subtype": "offensive",
-    "minValues": [ 11, 2, 2 ],
-    "maxValues": [ 13, 3, 3 ],
+    "basicValues": [ 11, 2, 2 ],
     "texture": "AKCdodge"
   },
   "bloodyBlowAKC": {
     "type": "data",
     "activity": "fight",
     "subtype": "offensive",
-    "minValues": [ 11, 2, 2 ],
-    "maxValues": [ 13, 3, 3 ],
+    "basicValues": [ 11, 2, 2 ],
     "texture": "AKCbloodyBlow"
   },
   "windPostureAKC": {
     "type": "data",
     "activity": "fight",
     "subtype": "offensive",
-    "minValues": [ 11, 2, 2 ],
-    "maxValues": [ 13, 3, 3 ],
+    "basicValues": [ 11, 2, 2 ],
     "texture": "AKCwindPosture"
   },
   "waterPostureAKC": {
     "type": "data",
     "activity": "fight",
     "subtype": "offensive",
-    "minValues": [ 11, 2, 2 ],
-    "maxValues": [ 13, 3, 3 ],
+    "basicValues": [ 11, 2, 2 ],
     "texture": "AKCwaterPosture"
   },
   "evenBreathingAKC": {
     "type": "data",
     "activity": "fight",
     "subtype": "offensive",
-    "minValues": [ 11, 2, 2 ],
-    "maxValues": [ 13, 3, 3 ],
+    "basicValues": [ 11, 2, 2 ],
     "texture": "AKCevenBreathing"
   }
 

@@ -30,7 +30,7 @@ namespace Didax
 
 		sf::Sprite m_sprite;
 
-		sf::Color m_standardColorMask{ 175, 175, 175, 255 };
+		sf::Color m_standardColorMask{ 210, 210, 210, 255 };
 		sf::Color m_hoverColorMask{ 255, 255, 255, 255 };
 		sf::Color m_clickedColorMask{255, 255, 255, 255 };
 

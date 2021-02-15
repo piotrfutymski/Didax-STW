@@ -81,14 +81,14 @@
   },
   "AKCwindPosture": {
     "type": "texture",
-    "path": "data/graphix/AKCbloodyBlow.bmp"
+    "path": "data/graphix/AKCwindPosture.bmp"
   },
   "AKCwaterPosture": {
     "type": "texture",
-    "path": "data/graphix/AKCbloodyBlow.bmp"
+    "path": "data/graphix/AKCwaterPosture.bmp"
   },
   "AKCevenBreathing": {
     "type": "texture",
-    "path": "data/graphix/AKCbloodyBlow.bmp"
+    "path": "data/graphix/AKCevenBreathing.bmp"
   }
 }

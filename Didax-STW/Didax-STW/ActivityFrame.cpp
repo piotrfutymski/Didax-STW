@@ -23,6 +23,10 @@ void ActivityFrame::_onKill(Didax::Engine* e)
 
 void ActivityFrame::_onCallback(const FrameEvent& e, Didax::Engine* eng)
 {
+	if (e.name == "showInfo")
+		showInfo(e.caller, eng);
+	else if (e.name == "hideInfo")
+		hideInfo(e.caller, eng);
 }
 
 void ActivityFrame::beginTurn(Didax::Engine* eng)
@@ -35,7 +39,10 @@ void ActivityFrame::beginTurn(Didax::Engine* eng)
 	for (auto& a : activt)
 	{
 		auto& dat = eng->getAssets()->getAsset<Didax::DataAsset>(a)->data;
-		auto item = eng->addEntity<FrameElement>("actItem"+std::to_string(i),this);
+		auto item = eng->addEntity<ActionElement>("actItem"+std::to_string(i),this);
+		item->getScript<ActionElement>()->addCallback(Didax::Widget::CallbackType::onHoverIn, { "showInfo","" });
+		item->getScript<ActionElement>()->addCallback(Didax::Widget::CallbackType::onHoverOut, { "hideInfo","" });
+		item->getScript<ActionElement>()->addCallback(Didax::Widget::CallbackType::onPress, { "hideInfo","" });
 		auto c = item->getWidget< Didax::Button>();
 		c->setTexture(dat["texture"]);
 		dad->addItem(item, i);
@@ -62,4 +69,19 @@ void ActivityFrame::createDragAndDrop(Didax::Engine* e)
 		pos.push_back({ x+absB.x-absA.x,y });
 	}
 	m_objects["ActionPanelWIDG"]->addScript<DragAndDrop>(pos, sf::Vector2f{ 80, 80 });
+}
+
+void ActivityFrame::showInfo(Didax::Entity_ptr item, Didax::Engine* e)
+{
+	if (m_objects["ActionPanelWIDG"]->getScript<DragAndDrop>()->draggedItem() != nullptr)
+		return;
+	eventOpen("activityInfoWIDG", e);
+	auto w = m_objects["activityInfoWIDG"]->getWidget();
+	auto iPos = item->getWidget()->getAbsolutePosition();
+	int spacing = e->getAssets()->getAsset<Didax::DataAsset>("activityInfoWIDG")->data["info"]["spacing"];
+	w->setAbsolutePosition(iPos.x, iPos.y - spacing - w->getSize().y);
+}
+void ActivityFrame::hideInfo(Didax::Entity_ptr item, Didax::Engine* e)
+{
+	eventClose("activityInfoWIDG", e);
 }
