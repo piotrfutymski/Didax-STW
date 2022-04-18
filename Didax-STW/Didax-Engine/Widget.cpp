@@ -13,6 +13,13 @@ void Didax::Widget::update(float dt)
 	{
 		updateEvents();
 		updateCallbacks();
+		for (auto& c : m_callbacks)
+		{
+			if (c == Widget::CallbackType::onHoverIn)
+				Input::setCursor(Input::CursorState::Click);
+			if (c == Widget::CallbackType::onHoverOut)
+				Input::setCursor(Input::CursorState::Standard);
+		}
 	}
 	this->_update(dt);
 	m_callbacks.clear();
